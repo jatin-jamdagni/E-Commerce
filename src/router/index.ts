@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomePage from '@/views/HomePage.vue'
-import CartPage from '@/views/CartPage.vue';
-import ProductDetails from '@/views/ProductDetails.vue';
 import { getAuth, onAuthStateChanged } from '@firebase/auth';
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -47,6 +44,7 @@ const router = createRouter({
       name: 'SignUp',
       component: ()=> import('@/views/SignUp.vue'),
     },
+    { path: '/:pathMatch(.*)', component: ()=> import('@/views/NotFoundPage.vue') },
   ]
 });
 
@@ -62,9 +60,10 @@ const getCurrentUser = () =>{
 }
 
 router.beforeEach(async (to, from, next)=>{
+  const isAuthenticated = await getCurrentUser();
   if(to.matched.some( (record)=> record.meta.requiresAuth)){
-    
-  if(await getCurrentUser()){
+
+  if(isAuthenticated){
     next();
   }else{
     alert('you donnot have access')
@@ -72,8 +71,14 @@ router.beforeEach(async (to, from, next)=>{
   }
 
 }else{
-  next();
+  if (isAuthenticated && (to.name === 'SignIn' || to.name === 'SignUp')) {
+    // alert(`You are already ${to.name} .`);
+    next('/');
 }
-})
+
+else{
+  next();
+}}}
+)
 
 export default router;

@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-center text-lg">Create a account</h1>
+  <h1 class="text-center text-lg">SignIn a account</h1>
   <p><input type="email" placeholder="E-mail" v-model="email" /></p>
   <p><input type="password" placeholder="Password" v-model="password" /></p>
   <p v-if="errMsg">{{ errMsg }}</p>
@@ -9,8 +9,14 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup
+} from 'firebase/auth'
 import router from '@/router'
+import type { RouteLocationRaw } from 'vue-router'
 const email = ref('')
 const password = ref('')
 const errMsg = ref('')
@@ -19,14 +25,11 @@ const auth = getAuth()
 
 const register = () => {
   signInWithEmailAndPassword(auth, email.value, password.value)
-    .then((data) => {
-      alert('Succesfull Registered!')
-
-      console.log(auth.currentUser)
-      router.push('/')
+    .then(() => {
+      router.go(-1)
     })
     .catch((error) => {
-      console.log('error', error.code)
+      //   console.log('error', error.code)
       switch (error.code) {
         case 'auth/invalid-email':
           errMsg.value = 'Email is invalid.'
@@ -45,5 +48,18 @@ const register = () => {
     })
 }
 
-const signInWithGoogle = () => {}
+const signInWithGoogle = () => {
+  const provider = new GoogleAuthProvider()
+  signInWithPopup(getAuth(), provider)
+    .then(() => {
+      alert('Succesfull SignIn!')
+
+      console.log(auth.currentUser)
+      router.push('/')
+    })
+    .catch((error) => {
+      console.log('error', error.code)
+      alert(error.message)
+    })
+}
 </script>
