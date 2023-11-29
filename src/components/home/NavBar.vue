@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col-reverse md:flex-row lg:justify-center items-center lg:space-x-4 py-4 bg-[#994D1C]"
+    class="flex flex-col-reverse md:flex-row lg:justify-center items-center lg:space-x-4 py-4 bg-primary w-screen"
   >
     <!-- <router-link to="/signUp" v-if="!isLoggedIn">signUp</router-link>
     <router-link to="/signIn" v-if="!isLoggedIn">SignIn</router-link>
@@ -19,14 +19,14 @@
         <input
           type="text"
           placeholder="Search.."
-          class="bg-[#E48F45] py-2 px-4 rounded-md w-80 text-[#6B240C] font-medium placeholder:text-[#F5CCA0]"
+          class="bg-[#202327] py-2 px-4 pl-12 rounded-lg w-80 text-[#6B240C] font-medium placeholder:text-[#F5CCA0]"
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
           height="16"
           width="16"
           viewBox="0 0 512 512"
-          class="absolute right-4 bg-transparent"
+          class="absolute left-4 bg-transparent"
           fill="#6B240C"
         >
           <path
