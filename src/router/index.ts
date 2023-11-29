@@ -27,6 +27,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/user',
+      name: 'User-Profile',
+      component: () => import('@/views/UserProfile.vue'),
+      meta:{
+        requiresAuth: true
+      }
+    },
+    {
       path: '/orderHistory',
       name: 'OrderHistory',
       component: ()=> import('@/views/OrderHistory.vue'),
