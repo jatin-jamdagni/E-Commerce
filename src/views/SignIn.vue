@@ -4,7 +4,7 @@
   <p><input type="password" placeholder="Password" v-model="password" /></p>
   <p v-if="errMsg">{{ errMsg }}</p>
   <p><button @click="register">Submit</button></p>
-  <p><button @click="signInWithGoogle">Sign In with Google.</button></p>
+  <p><button type="submit" @click="signInWithGoogle">Sign In with Google.</button></p>
 </template>
 
 <script setup lang="ts">
@@ -16,7 +16,6 @@ import {
   signInWithPopup
 } from 'firebase/auth'
 import router from '@/router'
-import type { RouteLocationRaw } from 'vue-router'
 const email = ref('')
 const password = ref('')
 const errMsg = ref('')
