@@ -1,12 +1,21 @@
 <template>
   <nav class="lg:border-b border-white">
     <div
-      class="py-4 px-4 bg-black w-screen border-b border-white lg:border-none flex items-center justify-evenly"
+      class="py-4 px-4 bg-black w-screen border-b border-white lg:border-none flex items-center justify-center space-x-6 md:space-x-20"
     >
-      <img src="../../../public/logo.png" alt="Logo" class="w-[2.2em] lg:w-[4em]" />
-      <div class="flex items-center justify-center space-x-4 md:space-x-8">
+      <!-- Logo Image -->
+      <img
+        src="../../../public/logo.png"
+        alt="Logo"
+        class="w-[2.2em] md:w-[3em] lg:w-[4em] duration-300"
+        @click="router.push('/')"
+      />
+      <!-- centeral Part -->
+      <div class="flex items-center justify-center lg:space-x-8">
+        <!-- Category Items -->
         <NavBarBottom display=" hidden lg:flex" />
-        <div class="bg-black text-white flex items-center justify-center space-x-4">
+        <!-- Search Bar -->
+        <div class="bg-black text-white flex items-center justify-center space-x-6">
           <div class="relative flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -29,9 +38,10 @@
               placeholder="Search"
               @focus="isSearchFocused = true"
               @blur="isSearchFocused = false"
-              class="bg-transparent placeholder:text-gray-400 text-white rounded-full pl-10 px-4 py-2 w-[70vw] lg:w-[25vw] font-semibold border-2 border-gray-400 focus:outline-white focus:text-white focus:placeholder:text-white focus:bg-transparent duration-150 hover:border-white"
+              class="bg-transparent placeholder:text-gray-500 text-white rounded-full pl-10 px-4 py-2 w-[70vw] md:w-[50vw] lg:w-[25vw] font-semibold border-2 border-gray-500 focus:outline-white focus:text-white focus:placeholder:text-white focus:bg-transparent duration-150 hover:border-white"
             />
           </div>
+          <!-- cart  -->
           <div>
             <button @click="router.push('/cart')">
               <svg
@@ -48,6 +58,19 @@
             </button>
           </div>
         </div>
+      </div>
+      <!-- User Credentials -->
+      <div class="hidden md:flex space-x-6">
+        <button @click="router.push('/signIn')" v-if="!isLoggedIn">Login</button>
+        <button
+          @click="router.push('/signUp')"
+          v-if="!isLoggedIn"
+          class="px-6 py-2 bg-white text-black rounded-full font-semibold"
+        >
+          SignUp
+        </button>
+        <button @click="router.push('/user')" v-if="isLoggedIn">Profile</button>
+        <button @click="handleSignOut" v-if="isLoggedIn">SignOut</button>
       </div>
     </div>
     <div>
@@ -71,6 +94,7 @@ onMounted(() => {
   auth = getAuth()
   onAuthStateChanged(auth, (user) => {
     if (user) {
+      console.log('hlo', user)
       isLoggedIn.value = true
     } else {
       isLoggedIn.value = false
@@ -91,7 +115,7 @@ const handleSignOut = () => {
 }
 
 .fill_gray_400 {
-  @apply fill-gray-400;
+  @apply fill-gray-500;
 }
 </style>
 

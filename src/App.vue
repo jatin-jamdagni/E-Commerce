@@ -1,7 +1,7 @@
 <template>
   <main class="relative w-screen h-screen overflow-hidden">
     <NavBar />
-    <!-- <RouterView /> -->
+    <RouterView />
   </main>
 </template>
 

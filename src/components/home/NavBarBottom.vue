@@ -19,6 +19,6 @@ defineProps({
 
 <style scoped>
 li {
-  @apply px-4 py-[4px] text-center text-gray-300 hover:text-white focus:text-white;
+  @apply px-4 py-[4px] text-center text-gray-400 hover:text-white focus:text-white font-semibold duration-300;
 }
 </style>

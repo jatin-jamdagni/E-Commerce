@@ -1,7 +1,9 @@
 <template>
   <h1 class="text-center text-lg">Signin a account</h1>
-  <p><input type="email" placeholder="E-mail" v-model="email" /></p>
-  <p><input type="password" placeholder="Password" v-model="password" /></p>
+  <p><input type="text" placeholder="Firt Name" v-model="firstName" required /></p>
+  <p><input type="text" placeholder="Last Name" v-model="lastName" /></p>
+  <p><input type="email" placeholder="E-mail" v-model="email" required /></p>
+  <p><input type="password" placeholder="Password" v-model="password" required /></p>
   <p><button @click="register">Submit</button></p>
   <p><button @click="signInWithGoogle">Sign In with Google.</button></p>
 </template>
@@ -12,21 +14,50 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  updateProfile
 } from 'firebase/auth'
 import router from '@/router'
 const email = ref('')
 const password = ref('')
+const firstName = ref('')
+const lastName = ref('')
 
 const auth = getAuth()
 
+// const register = () => {
+//   createUserWithEmailAndPassword(auth, email.value, password.value)
+//     .then((userCredentials) => {
+
+//       alert('Succesfull SignIn!')
+
+//       console.log(auth.currentUser)
+//       router.push('/')
+//     })
+//     .catch((error) => {
+//       console.log('error', error.code)
+//       alert(error.message)
+//     })
+// }
+
 const register = () => {
   createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then(() => {
-      alert('Succesfull SignIn!')
+    .then((userCredential) => {
+      const user = userCredential.user
 
-      console.log(auth.currentUser)
-      router.push('/')
+      // Update user profile with first and last name
+      updateProfile(user, {
+        displayName: `${firstName.value} ${lastName.value}`
+      })
+        .then(() => {
+          alert('Successful Sign In!')
+          console.log(auth.currentUser)
+          router.push('/')
+        })
+        .catch((error) => {
+          console.log('error', error.code)
+          alert(error.message)
+        })
     })
     .catch((error) => {
       console.log('error', error.code)
@@ -37,9 +68,15 @@ const register = () => {
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider()
   signInWithPopup(getAuth(), provider)
-    .then(() => {
-      alert('Succesfull SignIn!')
+    .then((result) => {
+      const user = result.user
 
+      // Additional user information
+      const displayName = user.displayName // This will include the full name
+
+      // const [firstName, lastName] = displayName.split(' ');
+
+      alert('Successful Sign In!')
       console.log(auth.currentUser)
       router.push('/')
     })
