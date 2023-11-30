@@ -1,7 +1,7 @@
 <template>
   <nav class="lg:border-b border-white">
     <div
-      class="py-4 px-4 bg-black w-screen border-b border-white lg:border-none flex items-center justify-center space-x-6 md:space-x-20"
+      class="py-4 px-4 bg-black w-screen border-b border-white lg:border-none flex items-center justify-center space-x-4 md:space-x-20"
     >
       <!-- Logo Image -->
       <img
@@ -15,7 +15,7 @@
         <!-- Category Items -->
         <NavBarBottom display=" hidden lg:flex" />
         <!-- Search Bar -->
-        <div class="bg-black text-white flex items-center justify-center space-x-6">
+        <div class="bg-black text-white flex items-center justify-center space-x-4">
           <div class="relative flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
