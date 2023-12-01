@@ -28,7 +28,6 @@ const register = () => {
       router.go(-1)
     })
     .catch((error) => {
-      //   console.log('error', error.code)
       switch (error.code) {
         case 'auth/invalid-email':
           errMsg.value = 'Email is invalid.'
@@ -52,12 +51,9 @@ const signInWithGoogle = () => {
   signInWithPopup(getAuth(), provider)
     .then(() => {
       alert('Succesfull SignIn!')
-
-      console.log(auth.currentUser)
       router.push('/')
     })
     .catch((error) => {
-      console.log('error', error.code)
       alert(error.message)
     })
 }

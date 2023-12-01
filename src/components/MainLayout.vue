@@ -1,14 +1,13 @@
 <template>
   <div>
-    <!-- Common Navbar -->
+    <!-- Nromal Routes -->
     <Navbar />
-
-    <!-- Main Content -->
     <router-view />
 
-    <!-- Additional named views for login and signup -->
+    <!-- Auth Routes -->
     <router-view name="login" />
     <router-view name="signup" />
+    <router-view name="userProfile" />
   </div>
 </template>
 

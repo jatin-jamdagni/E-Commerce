@@ -25,21 +25,6 @@ const lastName = ref('')
 
 const auth = getAuth()
 
-// const register = () => {
-//   createUserWithEmailAndPassword(auth, email.value, password.value)
-//     .then((userCredentials) => {
-
-//       alert('Succesfull SignIn!')
-
-//       console.log(auth.currentUser)
-//       router.push('/')
-//     })
-//     .catch((error) => {
-//       console.log('error', error.code)
-//       alert(error.message)
-//     })
-// }
-
 const register = () => {
   createUserWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
@@ -51,16 +36,13 @@ const register = () => {
       })
         .then(() => {
           alert('Successful Sign In!')
-          console.log(auth.currentUser)
           router.push('/')
         })
         .catch((error) => {
-          console.log('error', error.code)
           alert(error.message)
         })
     })
     .catch((error) => {
-      console.log('error', error.code)
       alert(error.message)
     })
 }
@@ -68,20 +50,11 @@ const register = () => {
 const signInWithGoogle = () => {
   const provider = new GoogleAuthProvider()
   signInWithPopup(getAuth(), provider)
-    .then((result) => {
-      const user = result.user
-
-      // Additional user information
-      const displayName = user.displayName // This will include the full name
-
-      // const [firstName, lastName] = displayName.split(' ');
-
+    .then(() => {
       alert('Successful Sign In!')
-      console.log(auth.currentUser)
       router.push('/')
     })
     .catch((error) => {
-      console.log('error', error.code)
       alert(error.message)
     })
 }

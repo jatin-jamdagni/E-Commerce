@@ -1,6 +1,6 @@
 <template>
   <ul
-    class="flex pl-10 justify-center space-x-2 py-4 items-center lg:shadow-none shadow-[0px_1px_0px_0px_px] shadow-gray-700 overflow-y-auto"
+    class="flex justify-center space-x-2 py-4 items-center lg:shadow-none shadow-[0px_1px_0px_0px_px] shadow-gray-700 overflow-y-auto"
     :class="display"
   >
     <li>Mens</li>
