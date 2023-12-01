@@ -1,18 +1,11 @@
 <template>
-  <div class="products-list">
-    <!-- <v-text-field clearable label="Label" prepend-icon="$vuetify"></v-text-field>
-    <v-row no-gutters>
-      <v-col
-        v-for="product in store.product"
-        :key="product.id"
-        cols="12"
-        sm="4"
-        @click="goToProductPage(product.id)"
-      >
-        <product-item :product-data="product" @item-clicked="goToProductPage" />
-      </v-col>
-    </v-row> -->
-    hlo
+  <div class="max-h-screen">
+    <div v-for="product in store.products" :key="product.id" class="relativeflex flex-wrap">
+      <div class="h-40 flex items-center justify-center">
+        <img :src="product.thumbnail" :alt="product.title" class="h-72 w-72" />
+        <h2>{{ product.title }}</h2>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,8 +13,6 @@
 import { onMounted, ref } from 'vue'
 import { useProductStore } from '@/stores/productStore'
 import { useRouter } from 'vue-router'
-
-// import ProductItem from '@/components/ProductItem.vue'
 
 const store = useProductStore()
 const router = useRouter()
