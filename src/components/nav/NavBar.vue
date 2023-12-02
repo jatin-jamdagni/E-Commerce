@@ -1,5 +1,5 @@
 <template>
-  <nav class="lg:border-b border-white">
+  <nav class="lg:border-b border-white h-fit">
     <div
       class="py-1 px-4 bg-black w-screen border-b border-white lg:border-none flex items-center justify-center space-x-3 md:space-x-12"
     >

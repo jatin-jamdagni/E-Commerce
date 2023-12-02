@@ -1,6 +1,6 @@
 <template>
-  <div class="max-h-screen">
-    <div v-for="product in store.products" :key="product.id" class="relativeflex flex-wrap">
+  <div class="">
+    <div v-for="product in store.products" :key="product.id" class="relative flex flex-wrap">
       <div class="h-40 flex items-center justify-center">
         <img :src="product.thumbnail" :alt="product.title" class="h-72 w-72" />
         <h2>{{ product.title }}</h2>
