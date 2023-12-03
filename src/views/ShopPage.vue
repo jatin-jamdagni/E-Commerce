@@ -70,7 +70,7 @@ import ProductContainer from '@/components/shop/ProductContainer.vue'
 import type { ProductTypes } from '@/types'
 
 const store = useProductStore()
-const displayedProducts: { value: ProductTypes[] } = ref([])
+const displayedProducts: { value: any } = ref([])
 const selectedCategories: { value: string[] } = ref([])
 
 const isPopupVisible = ref(false)
