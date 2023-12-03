@@ -1,129 +1,150 @@
 <template>
-  <nav class="lg:border-b border-white h-fit">
-    <div
-      class="py-1 px-4 bg-black w-screen border-b border-white lg:border-none flex items-center justify-center space-x-3 md:space-x-12"
-    >
-      <!-- Logo Image -->
-      <img
-        src="/logo.png"
-        alt="Logo"
-        class="w-[2.2em] md:w-[3em] lg:w-[4em] duration-300"
-        @click="router.push('/')"
-      />
-      <!-- centeral Part -->
-      <div class="flex items-center justify-center lg:space-x-8">
-        <!-- Category Items -->
-        <NavBarBottom display=" hidden lg:flex" />
-        <!-- Search Bar -->
-        <div class="bg-black text-white flex items-center justify-center space-x-4 lg:space-x-10">
-          <div class="relative flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="16"
-              width="16"
-              viewBox="0 0 512 512"
-              for="search"
-              :class="{ fill_white: isSearchFocused, fill_gray_400: !isSearchFocused }"
-              class="absolute left-4 bg-transparent transition-colors duration-150"
-            >
-              <path
-                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-              />
-            </svg>
-            <input
-              v-model="searchQuery"
-              type="text"
-              name="search"
-              id="search"
-              placeholder="Search"
-              @focus="isSearchFocused = true"
-              @blur="isSearchFocused = false"
-              class="bg-transparent placeholder:text-gray-500 text-white rounded-full pl-10 px-4 py-2 w-[70vw] md:w-[50vw] lg:w-[25vw] font-semibold border-2 border-gray-500 focus:outline-white focus:text-white focus:placeholder:text-white focus:bg-transparent duration-150 hover:border-white"
-            />
-          </div>
-          <!-- cart  -->
-          <div>
-            <button
-              @click="router.push('/cart')"
-              class="flex items-center"
-              @focus="isCartFocused = true"
-              @blur="isCartFocused = false"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24"
-                width="28"
-                class="bg-transparent fill-gray-400 focus:active:fill-white hover:fill-white duration-200"
-                viewBox="0 0 576 512"
-              >
-                <path
-                  d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- User Credentials -->
-      <div class="hidden md:flex space-x-6">
-        <button @click="router.push('/signIn')" v-if="!isLoggedIn">Login</button>
-        <button
-          @click="router.push('/signUp')"
-          v-if="!isLoggedIn"
-          class="px-6 py-2 bg-white text-black rounded-full font-semibold"
+  <nav
+    class="py-4 bg-white px-6 md:px-14 lg:justify-around flex items-center justify-between lg:space-x-72 flex-wrap sticky top-0 z-50"
+  >
+    <figure @click="navigateTo('/')" class="flex items-center space-x-2 cursor-pointer">
+      <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
+      <h2 class="font-medium font-sans text-orange-500">Shop</h2>
+    </figure>
+    <div class="flex items-center space-x-3 md:space-x-10">
+      <ul class="hidden lg:flex space-x-8">
+        <li @click="navigateTo('/')">Home</li>
+        <li @click="navigateTo('/shop')">Shop</li>
+        <li v-if="!isLoggedIn" @click="navigateTo('/signIn')">
+          <span class="bg-orange-500 py-3 px-5 rounded-lg text-white">Login</span>
+        </li>
+        <li v-if="isLoggedIn" @click="navigateTo('/signUp')">My Account</li>
+      </ul>
+
+      <!-- cart -->
+      <button v-if="isLoggedIn" @click="navigateTo('/cart')">
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          SignUp
-        </button>
-        <button
-          @click="router.push('/user')"
-          v-if="isLoggedIn"
-          class="flex items-center text-gray-500 space-x-2"
+          <path
+            d="M9 6L9 7C9 8.65685 10.3431 10 12 10C13.6569 10 15 8.65685 15 7V6"
+            stroke="#131118"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M15.6116 3H8.3886C6.43325 3 4.76449 4.41365 4.44303 6.3424L2.77636 16.3424C2.37001 18.7805 4.25018 21 6.72194 21H17.2783C19.75 21 21.6302 18.7805 21.2238 16.3424L19.5572 6.3424C19.2357 4.41365 17.5669 3 15.6116 3Z"
+            stroke="#131118"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
+
+      <!-- Pop -->
+      <button @click="togglePopup" class="lg:hidden">
+        <svg
+          v-if="!isPopupVisible"
+          :class="isLoggedIn ? ' hidden' : 'block'"
+          width="25"
+          height="24"
+          viewBox="0 0 25 24"
+          fill="none"
+          class="duration-300 active:blur-sm active:rotate-12"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <p class="px-3 py-1 rounded-full border-2 border-[#db8000] text-center flex items-center">
-            {{ firstName ? firstName : 'Admin' }}
-          </p>
-          <svg xmlns="http://www.w3.org/2000/svg" height="23" width="23" viewBox="0 0 512 512">
-            <path
-              fill="#db8000"
-              d="M256 288A144 144 0 1 0 256 0a144 144 0 1 0 0 288zm-94.7 32C72.2 320 0 392.2 0 481.3c0 17 13.8 30.7 30.7 30.7H481.3c17 0 30.7-13.8 30.7-30.7C512 392.2 439.8 320 350.7 320H161.3z"
-            />
-          </svg>
-        </button>
-        <button @click="handleSignOut" v-if="isLoggedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" height="23" width="23" viewBox="0 0 512 512">
-            <path
-              fill="#ff0000"
-              d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div>
-      <NavBarBottom display=" block lg:hidden" />
+          <path
+            d="M4.23047 6H20.2305M4.23047 12H20.2305M13.2305 18H20.2305"
+            stroke="black"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <svg
+          v-if="!isPopupVisible && isLoggedIn"
+          width="25"
+          height="24"
+          viewBox="0 0 25 24"
+          :class="isLoggedIn ? ' block' : 'hidden'"
+          fill="none"
+          class="duration-300 active:blur-sm active:rotate-12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4.23047 6H20.2305M4.23047 12H20.2305M13.2305 18H20.2305"
+            stroke="#f97316"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <svg
+          v-if="isPopupVisible"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="#f97316"
+          class="stroke-orange-500 active:-rotate-45 duration-300"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19 5L5 19M5 5L19 19"
+            stroke="f97316"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </button>
     </div>
   </nav>
+
+  <div
+    v-if="isPopupVisible"
+    class="pop absolute top-16 right-4 md:right-14 w-40 bg-white shadow-md rounded-lg active:blur-md duration-300 flex justify-end z-50"
+  >
+    <ul class="list-none p-4">
+      <li @click="navigateTo('/')">Home</li>
+      <li @click="navigateTo('/shop')">Shop</li>
+      <li v-if="!isLoggedIn" @click="navigateTo('/signIn')">Login</li>
+      <li v-if="!isLoggedIn" @click="navigateTo('/signUp')">Create Account</li>
+      <li v-if="isLoggedIn" @click="handleLogout">Logout</li>
+      <li v-if="isLoggedIn" @click="navigateTo('/signUp')">My Account</li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
-import router from '@/router'
-import NavBarBottom from './NavBarBottom.vue'
-import { ref } from 'vue'
-const isSearchFocused = ref(false)
-const searchQuery = ref('')
-const isCartFocused = ref(false)
-// const searchQuery = ref('')
 import useUserCrediential from '@/stores/authStore'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const { firstName, isLoggedIn, handleSignOut } = useUserCrediential()
-</script>
+const isPopupVisible = ref(false)
+const router = useRouter()
 
-<style>
-.fill_white {
-  @apply fill-white;
+const togglePopup = () => {
+  isPopupVisible.value = !isPopupVisible.value
 }
 
-.fill_gray_400 {
-  @apply fill-gray-500;
+const navigateTo = (route: string) => {
+  router.push(route)
+  isPopupVisible.value = false
+}
+
+const { isLoggedIn, handleSignOut } = useUserCrediential()
+
+const handleLogout = async () => {
+  await handleSignOut()
+  isPopupVisible.value = false
+}
+</script>
+
+<style scoped>
+li {
+  @apply cursor-pointer text-right font-mono text-gray-600 active:text-orange-500 text-lg font-thin;
+}
+.pop li {
+  @apply mb-2;
 }
 </style>
