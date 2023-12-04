@@ -1,4 +1,3 @@
-// import { ProductTypes } from '@/'
 import type { CartItemTypes, ProductTypes } from '@/types'
 import { defineStore } from 'pinia'
 
@@ -21,30 +20,38 @@ export const useProductStore = defineStore('product', {
       const categories = await response.json()
       this.categories = categories
     },
-    // async searchProducts(query: string) {
-    //   const response = await fetch(`https://dummyjson.com/products/search?q=${query}`)
-    //   const searchProduct = await response.json()
-    //   this.products = []
-    //   this.products = searchProduct
-    // }
-    // searchProduct(search: string) {
-    //   const searchTerm = search.toLowerCase()
+    addToCart(product: ProductTypes | undefined) {
+      const existingItem = this.cartItems.find((item) => item.id === product?.id)
 
-    //   // Create a case-insensitive regex pattern
-    //   const regexPattern = new RegExp(searchTerm, 'i')
-
-    //   const filteredProducts = this.product.filter((item) => {
-    //     return regexPattern.test(item?.title) || regexPattern.test(item.category)
-    //   })
-
-    //   // Assuming you want to update the state with the filtered products
-    //   this.product = filteredProducts
-    // }
-    addToCart(products: any) {
-      this.cartItems.push(products)
+      if (existingItem) {
+        existingItem.quantity += 1
+      } else {
+        this.cartItems.push({
+          ...(product as ProductTypes),
+          images: product!.images || [],
+          quantity: 1
+        })
+      }
+      this.saveCartToLocalStorage()
     },
+
     removeFromCart(id: number) {
-      this.cartItems = this.cartItems.filter((item) => item.id !== id)
+      this.cartItems = this.cartItems.filter((item) => {
+        if (item.id === id) {
+          item.quantity -= 1
+
+          if (item.quantity === 0) {
+            return false
+          }
+        }
+        return true
+      })
+
+      this.saveCartToLocalStorage()
+    },
+
+    saveCartToLocalStorage() {
+      localStorage.setItem('cart', JSON.stringify(this.cartItems))
     }
   }
 })

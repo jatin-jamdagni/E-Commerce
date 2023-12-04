@@ -9,11 +9,20 @@ export interface ProductTypes {
   brand: string
   category: string
   thumbnail: string
-  images: string[]
+  images: string[] | undefined
 }
 
 export interface CartItemTypes {
   id: number
-  product: ProductTypes
+  title: string
+  description: string
+  price: number
+  discountPercentage: number
+  rating: number
+  stock: number
+  brand: string
+  category: string
+  thumbnail: string
+  images: string[]
   quantity: number
 }

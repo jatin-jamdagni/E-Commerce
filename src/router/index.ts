@@ -40,60 +40,6 @@ const router = createRouter({
   ]
 })
 
-//   routes: [
-//     {
-//       path: '/',
-//       name: 'Home',
-//       component:()=> import('@/views/HomePage.vue'),
-//     },
-//     {
-//       path: '/cart',
-//       name: 'Cart',
-//       component: ()=> import('@/views/CartPage.vue'),
-//     },
-//     {
-//       path: '/product',
-//       name: 'Product',
-//       component: ()=> import('@/views/ProductDetails.vue'),
-//     },
-//     {
-//       path: '/payment',
-//       name: 'Payment',
-//       component: ()=> import('@/views/PaymentPage.vue'),
-//       meta:{
-//         requiresAuth: true
-//       }
-//     },
-//     {
-//       path: '/orderHistory',
-//       name: 'OrderHistory',
-//       component: ()=> import('@/views/OrderHistory.vue'),
-//       meta:{
-//         requiresAuth: true
-//       }
-//     },
-//     {
-//       path: '/signIn',
-//       name: 'SignIn',
-//       component: ()=> import('@/views/SignIn.vue')
-//     },
-//     {
-//       path: '/signUp',
-//       name: 'SignUp',
-//       component: ()=> import('@/views/SignUp.vue'),
-//     },
-//     {
-//       path: "/user",
-//       name: "userProfile",
-//       component: () => import('@/views/ProfilePage.vue'),
-//       meta:{
-//         requiresAuth: true
-//       }
-//     },
-//     { path: '/:pathMatch(.*)', component: ()=> import('@/views/NotFoundPage.vue') },
-//   ]
-// });
-
 const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const removeListner = onAuthStateChanged(

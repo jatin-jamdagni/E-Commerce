@@ -92,7 +92,6 @@ onMounted(async () => {
 
 const updateDisplayedProducts = () => {
   displayedProducts.value = [...store.products]
-  // displayedProducts.value = [..store.prd]
 }
 
 const filterProductsByCategory = () => {
