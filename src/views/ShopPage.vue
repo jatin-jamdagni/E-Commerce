@@ -26,8 +26,12 @@
   <div class="flex flex-col md:flex-row flex-wrap justify-around items-center">
     <!-- Products Display -->
 
-    <div v-for="product in displayedProducts" :key="product.id" class="">
-      <ProductContainer :productData="product" />
+    <div
+      v-for="product in displayedProducts.value"
+      :key="product.id"
+      @click="goToProductPage(product.id)"
+    >
+      <ProductContainer :productData="product" @item-clicked="goToProductPage" />
     </div>
   </div>
 
@@ -56,7 +60,7 @@
         </label>
       </div>
       <div class="flex justify-around items-center space-x-4">
-        <button class="btn" @click="filterProductsByCategory">Show</button>
+        <button class="btn" @click="filterProductsByCategory()">Show</button>
         <button @click="resetFilters" class="btn">Reset</button>
       </div>
     </div>
@@ -64,13 +68,14 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useProductStore } from '@/stores/productStore'
 import ProductContainer from '@/components/shop/ProductContainer.vue'
 import type { ProductTypes } from '@/types'
+import router from '@/router'
 
 const store = useProductStore()
-const displayedProducts: { value: any } = ref([])
+const displayedProducts: { value: ProductTypes[] } = reactive({ value: [] })
 const selectedCategories: { value: string[] } = ref([])
 
 const isPopupVisible = ref(false)
@@ -88,7 +93,6 @@ onMounted(async () => {
 const updateDisplayedProducts = () => {
   displayedProducts.value = [...store.products]
   // displayedProducts.value = [..store.prd]
-  console.log(displayedProducts)
 }
 
 const filterProductsByCategory = () => {
@@ -119,6 +123,10 @@ const lowToHighProducts = () => {
 }
 const highToLowProducts = () => {
   displayedProducts.value = [...displayedProducts.value].sort((a, b) => b.price - a.price)
+}
+
+const goToProductPage = (id: number) => {
+  router.push({ name: 'ProductView', params: { id } })
 }
 </script>
 

@@ -1,6 +1,6 @@
 <!-- ProductContainer.vue -->
 <template>
-  <main class="relative shadow-md my-5 bg-gray-100">
+  <main class="relative shadow-md my-5 bg-gray-100" @click="goToProductPage(productData.id)">
     <!-- Product Container -->
     <div class="p-2 space-y-2 w-80 rounded-xl">
       <figure class="flex justify-center items-center">
@@ -20,7 +20,9 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
+import { defineProps, defineEmits } from 'vue'
+
+// const props = defineProps(['productData'])
 
 defineProps({
   productData: {
@@ -28,6 +30,12 @@ defineProps({
     required: true
   }
 })
+
+const emit = defineEmits(['item-clicked'])
+
+const goToProductPage = (productId: number) => {
+  emit('item-clicked', productId)
+}
 </script>
 
 <style scoped>

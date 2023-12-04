@@ -21,7 +21,7 @@ const router = createRouter({
       children: [
         { path: '', name: 'Home', component: Home },
         { path: 'cart', name: 'Cart', component: Cart },
-        { path: 'product', name: 'ProductDetail', component: Product },
+        { path: 'product/:id', name: 'ProductView', component: Product },
         { path: 'shop', name: 'Shop', component: ShopPage },
         { path: 'purchase', name: 'Purchase', component: MyPurchase, meta: { requiresAuth: true } },
         {

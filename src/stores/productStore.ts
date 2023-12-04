@@ -20,8 +20,7 @@ export const useProductStore = defineStore('product', {
       const response = await fetch('https://dummyjson.com/products/categories')
       const categories = await response.json()
       this.categories = categories
-    }
-
+    },
     // async searchProducts(query: string) {
     //   const response = await fetch(`https://dummyjson.com/products/search?q=${query}`)
     //   const searchProduct = await response.json()
@@ -41,12 +40,11 @@ export const useProductStore = defineStore('product', {
     //   // Assuming you want to update the state with the filtered products
     //   this.product = filteredProducts
     // }
-    // addToCart(products: any) {
-    //   this.cartItems.push(products)
-    // },
-    // removeFromCart(id: string) {
-    // //   console.log('>>>>> ID', id)
-    //   this.cartItems = this.cartItems.filter((item) => item?.id !== id)
-    // }
+    addToCart(products: any) {
+      this.cartItems.push(products)
+    },
+    removeFromCart(id: number) {
+      this.cartItems = this.cartItems.filter((item) => item.id !== id)
+    }
   }
 })
