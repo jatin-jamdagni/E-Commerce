@@ -1,16 +1,16 @@
 <!-- ProductContainer.vue -->
 <template>
   <main
-    class="shadow-md bg-gray-100 flex items-center justify-center"
+    class="shadow-md bg-gray-100 flex rounded-xl items-center justify-center"
     @click="goToProductPage(productData.id)"
   >
     <!-- Product Container -->
-    <div class="rounded-xl w-80 shadow-lg space-y-6">
+    <div class="rounded-xl w-80 shadow-lg space-y-2 p-2">
       <figure class="flex justify-center items-center">
         <img
           :src="productData.images[0]"
           :alt="productData.title"
-          class="h-[200px] w-fit py-2 bg-rem rounded-md"
+          class="h-[200px] bg-rem rounded-lg"
         />
       </figure>
       <div class="space-y-6 p-2">

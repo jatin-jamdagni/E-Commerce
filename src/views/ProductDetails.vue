@@ -9,7 +9,7 @@
     <div class="p-6 w-auto">
       <!-- Product Container -->
       <div
-        class="py-4 flex flex-col md:space-x-4 space-y-4 md:space-y-0 justify-center items-center md:flex-row sha"
+        class="flex flex-col md:space-x-4 space-y-4 md:space-y-0 justify-center items-center md:flex-row"
       >
         <div class="slider bg-gray-100 rounded-md shadow-md p-2">
           <div

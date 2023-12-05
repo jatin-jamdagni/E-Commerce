@@ -1,8 +1,8 @@
 <template>
-  <div class="relative h-full w-fit overflow-ellipsis">
+  <div class="relative h-full w-fit overflow-hidden">
     <!-- Nromal Routes -->
-    <div>
-      <Navbar />
+    <Navbar />
+    <div class="overflow-hidden">
       <router-view />
     </div>
 

@@ -27,13 +27,13 @@
 
     <!-- Products Display -->
     <div
-      class="flex flex-col md:flex-row flex-wrap space-y-4 justify-evenly md:space-x-4 items-center"
+      class="flex h-auto flex-col md:flex-row flex-wrap justify-around items-center space-y-6 p-2"
     >
       <div
         v-for="product in displayedProducts.value"
         :key="product.id"
         @click="goToProductPage(product.id)"
-        class="w-fit flex justify-center items-center relative"
+        class="h-full"
       >
         <ProductContainer :productData="product" @item-clicked="goToProductPage" />
       </div>
