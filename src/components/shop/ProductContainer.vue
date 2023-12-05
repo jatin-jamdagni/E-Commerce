@@ -1,16 +1,19 @@
 <!-- ProductContainer.vue -->
 <template>
-  <main class="relative shadow-md my-5 bg-gray-100" @click="goToProductPage(productData.id)">
+  <main
+    class="shadow-md bg-gray-100 flex items-center justify-center"
+    @click="goToProductPage(productData.id)"
+  >
     <!-- Product Container -->
-    <div class="p-2 space-y-2 w-80 rounded-xl">
+    <div class="rounded-xl w-80 shadow-lg space-y-6">
       <figure class="flex justify-center items-center">
         <img
           :src="productData.images[0]"
           :alt="productData.title"
-          class="h-[200px] bg-rem rounded-md"
+          class="h-[200px] w-fit py-2 bg-rem rounded-md"
         />
       </figure>
-      <div class="space-y-2">
+      <div class="space-y-6 p-2">
         <h2 class="font-bold truncate text-[20px]">{{ productData.title }}</h2>
         <h2 class="font-light truncate">{{ productData.description }}</h2>
         <h2 class="font-semibold text-[18px]">Price: ${{ productData.price }}</h2>

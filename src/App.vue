@@ -1,8 +1,7 @@
 <template>
   <main class="relative">
-    <!-- <NavBar /> -->
-    <RouterView />
-    <!-- <router-view></router-view> -->
+    <!-- <RouterView /> -->
+    <router-view />
   </main>
 </template>
 

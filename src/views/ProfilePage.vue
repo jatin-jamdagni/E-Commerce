@@ -1,5 +1,5 @@
 <template>
-  <h1 class="text-blue-600">User Profile</h1>
+  <div>hlo</div>
 </template>
 
 <script setup lang="ts"></script>

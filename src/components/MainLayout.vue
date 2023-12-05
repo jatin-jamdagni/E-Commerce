@@ -1,8 +1,10 @@
 <template>
-  <div class="relative h-screen w-screen overflow-y-scroll">
+  <div class="relative h-full w-fit overflow-ellipsis">
     <!-- Nromal Routes -->
-    <Navbar />
-    <router-view />
+    <div>
+      <Navbar />
+      <router-view />
+    </div>
 
     <!-- Auth Routes -->
     <router-view name="login" />
