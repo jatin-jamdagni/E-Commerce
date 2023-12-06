@@ -1,7 +1,7 @@
 <template>
   <main class="px-10 w-auto space-y-10">
     <h2 class="text-center font-bold text-2xl my-4">Cart</h2>
-    <ul>
+    <ul class="max-h-[55vh] border-2 border-red-600 overflow-y-scroll">
       <li v-for="item in cartItems" :key="item.id">
         <div
           class="flex justify-around md:justify-between md:px-24 py-4 items-center space-x-4 border-b shadow-md"
