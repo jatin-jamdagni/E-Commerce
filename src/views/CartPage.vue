@@ -1,58 +1,118 @@
 <template>
-  <main class="px-10">
-    <h2>Your Cart</h2>
+  <main class="px-10 w-auto space-y-10">
+    <h2 class="text-center font-bold text-2xl my-4">Cart</h2>
     <ul>
       <li v-for="item in cartItems" :key="item.id">
-        <div>
-          {{ item.title }} - ${{ item.price }} - Quantity: {{ item.quantity }}
-          <button @click="subtractFromCart(item.id)">-</button>
-          <button @click="addToCart(item)">+</button>
+        <div
+          class="flex justify-around md:justify-between md:px-24 py-4 items-center space-x-4 border-b shadow-md"
+        >
+          <div class="flex items-center space-x-12">
+            <figure class="w-24 h-24 flex justify-center items-center bg-gray-100">
+              <img
+                :src="item.thumbnail"
+                :alt="item.title"
+                class="mix-blend-multiply hover:cursor-pointer"
+                @click="goToProductPage(item.id)"
+              />
+            </figure>
+            <div class="space-y-2 py-2">
+              <p
+                class="font-bold hover:cursor-pointer hover:text-blue-500 hover:underline"
+                @click="goToProductPage(item.id)"
+              >
+                {{ item.title }}
+              </p>
+              <p class="font-semibold">
+                $ <span class="text-orange-500">{{ item.price }}.00</span>
+              </p>
+              <div
+                class="flex w-20 justify-around items-center border-2 border-orange-500 rounded-[5px]"
+              >
+                <button @click="subtractFromCart(item.id)" class="btn_pm">-</button>
+                <p class="">{{ item.quantity }}</p>
+                <button @click="addToCart(item)" class="btn_pm">+</button>
+              </div>
+            </div>
+          </div>
+          <div class="flex space-y-10 flex-col items-center">
+            <span class="font-medium">${{ item.quantity * item.price }}.00</span>
+
+            <button @click="deleteFromCart(item.id)" class="btn_pm">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24"
+                width="20"
+                viewBox="0 0 448 512"
+                class="fill-orange-500 hover:scale-110 active:blur-md duration-200"
+              >
+                <path
+                  d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </li>
     </ul>
-    <p>Total: ${{ calculateTotal() }}</p>
+    <div class="p-4 space-y-2">
+      <p class="border-b pb-2">Summary</p>
+      <div class="w-auto flex justify-between border-b pb-2">
+        <p>Delivery Charges</p>
+        <span>$ 0</span>
+      </div>
+      <div class="w-auto flex justify-between border-b pb-2">
+        <p>Grand Total</p>
+        <span>${{ calculateTotal() }}</span>
+      </div>
+      <button
+        class="w-full py-1 border-2 border-orange-500 rounded-md active:bg-orange-500 active:text-white hover:shadow-md active:sm active:shadow-orange-500 shadow-lg"
+      >
+        {{ isLoggedIn ? 'Proceed to Checkout' : 'Login to Checkout' }}
+      </button>
+    </div>
   </main>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useProductStore } from '@/stores/productStore'
 import type { CartItemTypes } from '@/types'
+import { useRouter } from 'vue-router'
+import useUserCrediential from '@/stores/authStore'
+
+const { isLoggedIn } = useUserCrediential()
 
 const store = useProductStore()
-
-const cartItems = ref(store.cartItems)
-
+const router = useRouter()
+const cartItems = computed(() => store.cartItems)
 onMounted(() => {
-  // You can load cart items here if needed
+  store.loadCartFromLocalStorage()
 })
 
-// Action to subtract a quantity from the cart
 const subtractFromCart = (id: number) => {
   store.removeFromCart(id)
-  cartItems.value = cartItems.value.map((item) => {
-    if (item.id === id) {
-      item.quantity -= 1
-    }
-    return item
-  })
 }
 
-// Action to add a quantity to the cart
 const addToCart = (product: CartItemTypes) => {
   store.addToCart(product)
-  cartItems.value = cartItems.value.map((item) => {
-    if (item.id === product.id) {
-      item.quantity += 1
-    }
-    return item
-  })
+}
+const deleteFromCart = (id: number) => {
+  store.deleteCartItem(id)
 }
 
-// Function to calculate the total amount
 const calculateTotal = () => {
   return cartItems.value.reduce((total, item) => {
     return total + item.price * item.quantity
   }, 0)
 }
+
+const goToProductPage = (id: number) => {
+  router.push({ name: 'ProductView', params: { id } })
+}
 </script>
+
+<style scoped>
+.btn_pm {
+  @apply hover:text-orange-500 active:text-orange-500 hover:scale-150 duration-300;
+}
+</style>

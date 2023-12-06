@@ -1,7 +1,7 @@
 <!-- ProductContainer.vue -->
 <template>
   <main
-    class="shadow-md bg-gray-100 flex rounded-xl items-center justify-center"
+    class="shadow-md bg-gray-100 flex rounded-xl items-center"
     @click="goToProductPage(productData.id)"
   >
     <!-- Product Container -->
@@ -24,8 +24,6 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
-
-// const props = defineProps(['productData'])
 
 defineProps({
   productData: {

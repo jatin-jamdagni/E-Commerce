@@ -1,10 +1,15 @@
 <template>
-  <h1 class="text-center text-lg">SignIn a account</h1>
-  <p><input type="email" placeholder="E-mail" v-model="email" /></p>
-  <p><input type="password" placeholder="Password" v-model="password" /></p>
-  <p v-if="errMsg">{{ errMsg }}</p>
-  <p><button @click="register">Submit</button></p>
-  <p><button type="submit" @click="signInWithGoogle">Sign In with Google.</button></p>
+  <main class="flex flex-col justify-center items-center h-[80vh] space-y-10">
+    <form @submit.prevent="register" class="flex flex-col justify-center items-center space-y-10">
+      <h1 class="text-center text-[32px] font-semibold">SignIn To Account</h1>
+      <p v-if="errMsg">{{ errMsg }}</p>
+      <input class="inputs" type="email" placeholder="E-mail" v-model="email" required />
+      <input class="inputs" type="password" placeholder="Password" v-model="password" required />
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <button type="submit" @click="signInWithGoogle">Sign In with Google.</button>
 </template>
 
 <script setup lang="ts">
@@ -58,3 +63,9 @@ const signInWithGoogle = () => {
     })
 }
 </script>
+
+<style scoped>
+.inputs {
+  @apply py-4 px-6 w-72 placeholder:text-orange-300 shadow-orange-100 shadow-md active:border-2 focus:outline-orange-500 focus:outline-1 active:border-none rounded-md required:border-red-400;
+}
+</style>

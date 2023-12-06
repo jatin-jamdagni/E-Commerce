@@ -1,11 +1,23 @@
 <template>
-  <h1 class="text-center text-lg">Signin a account</h1>
-  <p><input type="text" placeholder="Firt Name" v-model="firstName" required /></p>
-  <p><input type="text" placeholder="Last Name" v-model="lastName" /></p>
-  <p><input type="email" placeholder="E-mail" v-model="email" required /></p>
-  <p><input type="password" placeholder="Password" v-model="password" required /></p>
-  <p><button @click="register">Submit</button></p>
-  <p><button @click="signInWithGoogle">Sign In with Google.</button></p>
+  <main class="flex flex-col justify-center items-center h-screen space-y-10">
+    <form @submit.prevent="register" class="flex flex-col justify-center items-center space-y-10">
+      <h1 class="text-center text-[32px] font-semibold">SignUp To Account</h1>
+      <div class="flex flex-col md:flex-row w-auto space-y-10">
+        <input class="inputs" type="text" placeholder="First Name" v-model="firstName" required />
+        <input class="inputs" type="text" placeholder="Last Name" v-model="lastName" />
+      </div>
+      <input class="inputs" type="email" placeholder="E-mail" v-model="email" required />
+      <input class="inputs" type="password" placeholder="Password" v-model="password" required />
+      <button
+        class="py-4 px-6 w-80 font-semibold active:bg-orange-500 active:text-white text-orange-500 border-orange-500 border-2 shadow-orange-200 shadow-md rounded-md"
+        type="submit"
+      >
+        Submit
+      </button>
+    </form>
+
+    <button @click="signInWithGoogle">Sign In with Google.</button>
+  </main>
 </template>
 
 <script setup lang="ts">
@@ -59,3 +71,9 @@ const signInWithGoogle = () => {
     })
 }
 </script>
+
+<style scoped>
+.inputs {
+  @apply py-4 px-6 w-80 placeholder:text-orange-300 shadow-orange-100 shadow-md active:border-2 focus:outline-orange-500 focus:outline-1 active:border-none rounded-md required:border-red-400;
+}
+</style>
