@@ -1,7 +1,5 @@
 <template>
-  <main class="px-10">
-    <h1>hlo</h1>
-  </main>
+  <main class="px-10"></main>
 </template>
 
 <script setup lang="ts">
@@ -74,51 +72,3 @@ onUnmounted(() => {
   stopAutoSlide()
 })
 </script>
-
-<style scoped>
-.slider {
-  position: relative;
-  width: 400px;
-  height: 400px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.slide {
-  display: none;
-}
-
-.slide img {
-  width: 100%;
-  height: auto;
-}
-
-.slide.active {
-  display: block;
-}
-
-.nav-btn {
-  position: absolute;
-  backdrop-filter: blur(10px);
-  transform: translateY(-50%);
-  border-radius: 10px;
-  padding: 10px;
-  cursor: pointer;
-}
-
-.prev {
-  bottom: 10px;
-  left: 10px;
-}
-
-.next {
-  bottom: 10px;
-  right: 10px;
-}
-
-.btn_prod {
-  @apply px-2 py-1 rounded-md w-40 h-12 shadow-lg hover:shadow-md active:shadow-sm duration-200 active:bg-[#f97316] border-2 border-[#f97316] text-black active:text-white;
-}
-</style>

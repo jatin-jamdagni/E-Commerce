@@ -2,26 +2,35 @@
   <main class="px-10">
     <button
       @click="$router.go(-1)"
-      class="px-2 py-1 rounded-md w-40 h-12 shadow-lg hover:shadow-md active:shadow-sm duration-200 active:bg-red-400 border-2 border-red-400 text-black active:text-white"
+      class="px-4 py-2 rounded-md w-auto h-12 shadow-lg hover:shadow-md active:shadow-sm duration-200 active:bg-red-400 border-2 border-red-400 text-black active:text-white mb-4"
     >
       Back
     </button>
-    <div class="p-6 w-auto">
+    <div class="p-6 w-auto bg-white rounded-lg shadow-md">
       <!-- Product Container -->
       <div
-        class="flex flex-col md:space-x-4 space-y-4 md:space-y-0 justify-center items-center md:flex-row"
+        class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 justify-center items-center"
       >
-        <div class="slider bg-gray-100 rounded-md shadow-md p-2">
-          <div
-            class="slide duration-300"
-            v-for="(slide, index) in slides"
-            :key="index"
-            :class="{ active: index === currentIndex }"
-          >
-            <img :src="slide" :alt="`Slide ${index + 1}`" class="duration-300" />
+        <div class="relative w-full md:w-1/2">
+          <div class="flex overflow-hidden rounded-lg">
+            <div
+              class="duration-300 flex transition-transform ease-in-out"
+              v-for="(slide, index) in slides"
+              :key="index"
+              :class="{
+                'translate-x-0': index === currentIndex,
+                'translate-x-full': index < currentIndex,
+                '-translate-x-full': index > currentIndex
+              }"
+            >
+              <img :src="slide" :alt="`Slide ${index + 1}`" class="w-full h-auto object-cover" />
+            </div>
           </div>
 
-          <button @click="prevSlide" class="nav-btn prev duration-300">
+          <button
+            @click="prevSlide"
+            class="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1/2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24"
@@ -34,7 +43,10 @@
               />
             </svg>
           </button>
-          <button @click="nextSlide" class="nav-btn next duration-300">
+          <button
+            @click="nextSlide"
+            class="absolute top-1/2 right-0 transform -translate-y-1/2 -translate-x-1/2"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24"
@@ -49,20 +61,29 @@
           </button>
         </div>
 
-        <div class="w-[400px] flex flex-col justify-center space-y-4 items-start px-4 py-6">
-          <h2 class="font-bold truncate text-[24px]">{{ selectedProduct?.title }}</h2>
-          <h2 class="font-bold truncate text-orange-500">
+        <div class="flex flex-col justify-center space-y-4 items-start md:w-1/2 px-4 py-6">
+          <h2 class="font-bold text-2xl truncate mb-2">{{ selectedProduct?.title }}</h2>
+          <h2 class="font-bold text-orange-500 mb-4">
             {{ `${selectedProduct?.brand} - ${selectedProduct?.category}` }}
           </h2>
 
-          <p class="font-light text-justify">{{ selectedProduct?.description }}</p>
+          <p class="font-light text-justify mb-4">{{ selectedProduct?.description }}</p>
 
-          <h2 class="font-semibold text-[18px]">
+          <h2 class="font-semibold text-lg mb-2">
             Price: ${{ selectedProduct?.discountPercentage }}
           </h2>
-          <div class="flex space-x-8 p-2 items-center">
-            <button class="btn_prod" @click="addToCartfn(selectedProduct)">Add to Cart</button>
-            <button class="btn_prod">Buy Now</button>
+          <div class="flex space-x-4 items-center">
+            <button
+              class="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue active:bg-blue-800"
+              @click="addToCartfn(selectedProduct)"
+            >
+              Add to Cart
+            </button>
+            <button
+              class="px-4 py-2 rounded-md bg-green-500 text-white hover:bg-green-700 focus:outline-none focus:shadow-outline-green active:bg-green-800"
+            >
+              Buy Now
+            </button>
           </div>
         </div>
       </div>

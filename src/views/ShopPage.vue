@@ -60,14 +60,19 @@
     <div
       class="flex h-auto flex-col md:flex-row flex-wrap justify-around items-center space-y-6 p-2"
     >
-      <div
-        v-for="product in displayedProducts.value"
-        :key="product.id"
-        @click="goToProductPage(product.id)"
-        class="flex flex-col md:flex-row flex-wrap space-y-4 justify-evenly md:space-x-4 items-center"
-      >
-        <ProductContainer :productData="product" @item-clicked="goToProductPage" />
-      </div>
+      <template v-if="displayedProducts.value && displayedProducts.value.length > 0">
+        <div
+          v-for="product in displayedProducts.value"
+          :key="product.id"
+          @click="goToProductPage(product.id)"
+          class="flex flex-col md:flex-row flex-wrap space-y-4 justify-evenly md:space-x-4 items-center"
+        >
+          <ProductContainer :productData="product" @item-clicked="goToProductPage" />
+        </div>
+      </template>
+      <template v-else>
+        <p>No product available for this filter.</p>
+      </template>
     </div>
   </main>
 </template>
@@ -119,6 +124,7 @@ const filterProducts = (minPrice: number, maxPrice: number) => {
   displayedProducts.value = displayedProducts.value.filter(
     (product) => product.price >= minPrice && product.price <= maxPrice
   )
+
   isPopupVisible.value = !isPopupVisible.value
 }
 
