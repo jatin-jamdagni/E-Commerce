@@ -25,7 +25,7 @@
       v-if="isPopupVisible"
       class="top-40 h-fit left-5 bg-gray-50 shadow-lg shadow-orange-100 rounded-lg z-50 flex py-4"
     >
-      <div class="flex flex-col items-center space-y-10 w-[35%] md:w-[40%] p-2">
+      <div class="flex flex-col items-center gap-y-10 w-[35%] md:w-[40%] p-2">
         <h1 class="md:text-md font-bold">Price Filters:</h1>
         <button class="btn" @click="filterProducts(0, 500)">0 - 500</button>
         <button class="btn" @click="filterProducts(500, 1000)">500 - 1000</button>
@@ -34,7 +34,7 @@
         <button class="btn" @click="highToLowProducts">High To Low</button>
       </div>
       <div
-        class="flex flex-col justify-between space-y-6 border-l-2 border-black items-center w-[65%] px-2"
+        class="flex flex-col justify-between gap-y-6 border-l-2 border-black items-center w-[65%] px-2"
       >
         <span class="text-md font-bold">Select Cetegories:</span>
         <div

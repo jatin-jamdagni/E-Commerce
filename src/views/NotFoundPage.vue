@@ -1,8 +1,10 @@
 import type router from '@/router';
 <template>
-  <video autoplay muted loop class="min-h-full min-w-full">
-    <source src="/notfound.mp4" />
-  </video>
+  <div class="flex justify-center py-4 bg-black">
+    <video autoplay muted loop class="h-[50vh]">
+      <source src="/notfound.mp4" />
+    </video>
+  </div>
   <div class="flex flex-col justify-center items-center w-auto">
     <h1 class="text-center text-[28px] font-semibold">
       <span class="text-orange-500">Bhai! </span>Tu

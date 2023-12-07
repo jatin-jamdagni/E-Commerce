@@ -10,6 +10,7 @@
     <!-- Auth Routes -->
     <router-view name="login" />
     <router-view name="signup" />
+    <router-view name="notfound" />
   </div>
 </template>
 

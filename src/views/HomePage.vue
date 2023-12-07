@@ -1,44 +1,40 @@
 <template>
-  <div class="px-10 py-2 flex flex-wrap">
-    <div class="flex flex-wrap w-full justify-center md:space-x-20">
-      <div class="md:w-[40vw]">
-        <h1 class="font-medium text-[30px] drop-shadow-lg font-['Syne'] md:w-[40vw]">
-          Deals of the Month
-        </h1>
-        <p class="font-light text-md md:w-[40vw]">
-          Get ready for a shopping experience like never before with our Deals of the Month! Every
-          purchase comes with exclusive perks and offers, making this month a celebration of savvy
-          choices and amazing deals. Don't miss out! 🎁🛒.
-        </p>
-        <div class="countdown">
-          <div class="box">
-            <span class="value">{{ days }}</span>
-            <span class="label">Days</span>
-          </div>
-          <div class="box">
-            <span class="value">{{ hours }}</span>
-            <span class="label">Hours</span>
-          </div>
-          <div class="box">
-            <span class="value">{{ minutes }}</span>
-            <span class="label">Minutes</span>
-          </div>
-          <div class="box">
-            <span class="value">{{ seconds }}</span>
-            <span class="label">Seconds</span>
-          </div>
-          <div class="w-full px-4 my-4">
-            <button
-              @click="router.push('/shop')"
-              class="py-2 w-full px-4 font-semibold active:bg-orange-500 active:text-white text-orange-500 border-orange-500 border-2 shadow-orange-200 shadow-md rounded-md"
-            >
-              Start Shoping
-            </button>
-          </div>
+  <div class="px-10 py-2 flex flex-wrap justify-center items-center">
+    <div class="md:w-1/2 lg:px-10">
+      <h1 class="font-medium text-[30px] drop-shadow-lg font-['Syne']">Deals of the Month</h1>
+      <p class="font-light text-md">
+        Get ready for a shopping experience like never before with our Deals of the Month! Every
+        purchase comes with exclusive perks and offers, making this month a celebration of savvy
+        choices and amazing deals. Don't miss out! 🎁🛒.
+      </p>
+      <div class="countdown">
+        <div class="box">
+          <span class="value">{{ days }}</span>
+          <span class="label">Days</span>
+        </div>
+        <div class="box">
+          <span class="value">{{ hours }}</span>
+          <span class="label">Hours</span>
+        </div>
+        <div class="box">
+          <span class="value">{{ minutes }}</span>
+          <span class="label">Minutes</span>
+        </div>
+        <div class="box">
+          <span class="value">{{ seconds }}</span>
+          <span class="label">Seconds</span>
+        </div>
+        <div class="w-full px-4 my-4">
+          <button
+            @click="router.push('/shop')"
+            class="py-2 w-full px-4 font-semibold active:bg-orange-500 active:text-white text-orange-500 border-orange-500 border-2 shadow-orange-200 shadow-md rounded-md"
+          >
+            Start Shoping
+          </button>
         </div>
       </div>
-      <img src="../assets/image-4.svg" alt="Deal" class="w-80" />
     </div>
+    <img src="../assets/image-4.svg" alt="Deal" class="md:w-1/2" />
   </div>
 </template>
 
@@ -72,11 +68,11 @@ onMounted(() => {
 
 <style scoped>
 .countdown {
-  @apply flex md:w-[40vw] flex-wrap px-4 justify-around gap-y-4 p-4;
+  @apply flex  flex-wrap py-6 px-8 justify-between items-center gap-y-5;
 }
 
 .box {
-  @apply w-32 p-6 border-2 shadow-md shadow-orange-500 rounded-lg hover:shadow-sm duration-300;
+  @apply w-28 px-4 py-6 border-2 shadow-md shadow-orange-500 rounded-lg hover:shadow-sm duration-300;
 }
 
 .value {

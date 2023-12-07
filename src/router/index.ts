@@ -30,13 +30,13 @@ const router = createRouter({
           component: MyOrders,
           meta: { requiresAuth: true }
         },
-        { path: 'user', name: 'userProfile', component: ProfilePage, meta: { requiresAuth: true } },
-        { path: '/:pathMatch(.*)', component: NotFoundPage }
+        { path: 'user', name: 'userProfile', component: ProfilePage, meta: { requiresAuth: true } }
       ]
     },
 
     { path: '/signIn', name: 'SignIn', component: SignIn },
-    { path: '/signUp', name: 'SignUp', component: SignUp }
+    { path: '/signUp', name: 'SignUp', component: SignUp },
+    { path: '/:pathMatch(.*)', name: 'notfound', component: NotFoundPage }
   ]
 })
 
