@@ -5,6 +5,7 @@
     <div class="overflow-hidden">
       <router-view />
     </div>
+    <FooterBar />
 
     <!-- Auth Routes -->
     <router-view name="login" />
@@ -13,5 +14,6 @@
 </template>
 
 <script setup lang="ts">
+import FooterBar from './nav/FooterBar.vue'
 import Navbar from './nav/NavBar.vue'
 </script>
