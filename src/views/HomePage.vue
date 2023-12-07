@@ -29,6 +29,7 @@
           </div>
           <div class="w-full px-4 my-4">
             <button
+              @click="router.push('/shop')"
               class="py-2 w-full px-4 font-semibold active:bg-orange-500 active:text-white text-orange-500 border-orange-500 border-2 shadow-orange-200 shadow-md rounded-md"
             >
               Start Shoping
