@@ -7,14 +7,14 @@
       Back
     </button>
     <div class="p-6 w-auto bg-white rounded-lg shadow-md">
-      <!-- Product Container -->
+      <!-- Product Container -->`
       <div
         class="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0 justify-center items-center"
       >
         <div class="relative w-full md:w-1/2">
           <div class="flex overflow-hidden rounded-lg">
             <div
-              class="duration-300 flex transition-transform ease-in-out"
+              class="duration-300 transition-transform ease-in-out flex"
               v-for="(slide, index) in slides"
               :key="index"
               :class="{
@@ -89,6 +89,10 @@
       </div>
     </div>
   </main>
+
+  <div v-for="item in relatedItem" :key="item.id">
+    {{ item.title }}
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -117,6 +121,12 @@ watch(
 const selectedProduct = computed(() => {
   const productId = Number(route.params.id)
   return store.products.find((item) => item.id !== undefined && item.id === productId)
+})
+
+const relatedItem = computed(() => {
+  return store.products.filter(
+    (item) => item.category !== undefined && item.category === selectedProduct.value?.category
+  )
 })
 
 const updateSlides = () => {
