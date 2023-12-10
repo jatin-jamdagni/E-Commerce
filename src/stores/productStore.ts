@@ -9,8 +9,10 @@ export const useProductStore = defineStore('product', {
   }),
 
   actions: {
-    async fetchProducts() {
-      const response = await fetch('https://dummyjson.com/products')
+    async fetchProducts(limit?: number, skip?: number) {
+      const response = await fetch(
+        `https://dummyjson.com/products?limit=${limit ? limit : 20}&skip=${skip ? skip * 2 : 0}`
+      )
       const json = await response.json()
       this.products = json.products
     },
