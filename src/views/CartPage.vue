@@ -66,16 +66,23 @@
       </div>
       <button
         v-if="isLoggedIn"
-        class="w-full py-1 border-2 border-orange-500 rounded-md active:bg-orange-500 active:text-white hover:shadow-md active:sm active:shadow-orange-500 shadow-lg"
+        class="w-full py-2 border-2 border-orange-500 rounded-md active:bg-orange-500 text-orange-500 active:text-white hover:shadow-md active:sm active:shadow-orange-500 shadow-lg duration-300"
       >
         Proceed to Checkout
       </button>
+
       <button
         v-else
         @click="router.push('/signIn')"
-        class="w-full py-1 border-2 border-orange-500 rounded-md active:bg-orange-500 active:text-white hover:shadow-md active:sm active:shadow-orange-500 shadow-lg"
+        class="w-full py-2 border-2 border-orange-500 rounded-md active:bg-orange-500 active:text-white hover:shadow-md active:sm active:shadow-orange-500 shadow-lg duration-300"
       >
         Login to Checkout
+      </button>
+      <button
+        @click="router.push('/shop')"
+        class="w-full py-2 border-2 active:border-green-500 rounded-md bg-green-500 active:bg-white active:text-green-500 text-white hover:shadow-md active:sm active:shadow-green-500 shadow-lg duration-300"
+      >
+        Continue Shoping
       </button>
     </div>
   </main>

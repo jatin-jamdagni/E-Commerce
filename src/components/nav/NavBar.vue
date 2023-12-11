@@ -1,6 +1,8 @@
 <template>
   <nav class="w-screen py-4 bg-white px-6 md:px-14 top-0 sticky z-50">
-    <div class="lg:justify-around flex items-center justify-between lg:space-x-72 flex-wrap">
+    <div
+      class="lg:justify-around flex items-center justify-between lg:space-x-72 flex-wrap relative"
+    >
       <figure @click="navigateTo('/')" class="flex items-center space-x-2 cursor-pointer flex-wrap">
         <img src="/logo.png" alt="Logo" class="h-16 w-auto" />
         <h2 class="font-medium font-sans text-orange-500">Shop</h2>
@@ -12,7 +14,7 @@
           <li v-if="!isLoggedIn" @click="navigateTo('/signIn')">
             <span class="bg-orange-500 py-3 px-5 rounded-lg text-white">Login</span>
           </li>
-          <li v-if="isLoggedIn" @click="navigateTo('/signUp')">My Account</li>
+          <li v-if="isLoggedIn" @click="navigateTo('/user')">My Account</li>
         </ul>
 
         <!-- cart -->
@@ -101,7 +103,7 @@
     </div>
     <div
       v-if="isPopupVisible"
-      class="pop p-4 lg:hidden bg-white shadow-md rounded-lg active:blur-md duration-300 flex justify-end z-50"
+      class="pop absolute right-10 p-4 lg:hidden bg-white shadow-md rounded-lg active:blur-md duration-300 flex justify-end z-50"
     >
       <ul class="list-none p-4 w-full truncate">
         <li @click="navigateTo('/')">Home</li>
@@ -117,12 +119,18 @@
 
 <script setup lang="ts">
 import useUserCrediential from '@/stores/authStore'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useProductStore } from '@/stores/productStore'
 
 const isPopupVisible = ref(false)
 const router = useRouter()
+
+const store = ref([])
+
+onMounted(() => {
+  useProductStore().loadCartFromLocalStorage()
+})
 
 const togglePopup = () => {
   isPopupVisible.value = !isPopupVisible.value

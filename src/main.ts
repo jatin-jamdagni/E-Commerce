@@ -1,3 +1,4 @@
+import { useProductStore } from './stores/productStore'
 import './main.css'
 
 import { createApp } from 'vue'
@@ -27,7 +28,6 @@ const firebaseConfig = {
 
 // Initialize Firebase
 initializeApp(firebaseConfig)
-// const analytics = getAnalytics(app);
 
 const app = createApp(App)
 
