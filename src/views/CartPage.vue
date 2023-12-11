@@ -6,7 +6,7 @@
         <div
           class="flex justify-around md:justify-between md:px-24 py-4 items-center space-x-4 border-b shadow-md w-full"
         >
-          <div class="flex items-center space-x-6 w-full">
+          <div class="flex items-center justify-around space-x-6 w-full">
             <figure class="w-24 h-24 flex justify-center items-center bg-gray-100">
               <img
                 :src="item.thumbnail"
@@ -15,7 +15,7 @@
                 @click="goToProductPage(item.id)"
               />
             </figure>
-            <div class="space-y-2 py-2 w-24 h-28">
+            <div class="space-y-2 py-2 w-[20vw] h-28">
               <p
                 class="font-bold hover:cursor-pointer hover:text-blue-500 hover:underline truncate"
                 @click="goToProductPage(item.id)"
