@@ -1,5 +1,5 @@
 <template>
-  <nav class="w-screen py-4 bg-white px-6 md:px-14 top-0 sticky z-50">
+  <nav class="w-screen py-4 bg-white px-6 md:px-14 top-0 sticky z-50 border-b">
     <div
       class="lg:justify-around flex items-center justify-between lg:space-x-72 flex-wrap relative"
     >

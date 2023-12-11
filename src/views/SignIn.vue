@@ -30,6 +30,7 @@ const auth = getAuth()
 const register = () => {
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then(() => {
+      window.location.reload()
       router.go(-1)
     })
     .catch((error) => {
@@ -56,6 +57,7 @@ const signInWithGoogle = () => {
   signInWithPopup(getAuth(), provider)
     .then(() => {
       alert('Succesfull SignIn!')
+      window.location.reload()
       router.push('/')
     })
     .catch((error) => {

@@ -1,8 +1,8 @@
 <template>
-  <main class="space-y-10">
-    <h2 class="text-center font-bold text-2xl my-4">Cart</h2>
-    <ul class="max-h-[55vh] overflow-y-scroll web p-4">
-      <li v-for="item in cartItems" :key="item.id">
+  <h2 class="text-center font-bold text-2xl my-4 underline">Cart</h2>
+  <main class="space-y-10 flex flex-col md:flex-row">
+    <div class="max-h-[55vh] overflow-y-scroll web p-4 w-full">
+      <div v-for="item in cartItems" :key="item.id">
         <div
           class="flex justify-around md:justify-between md:px-24 py-4 items-center space-x-4 border-b shadow-md w-full"
         >
@@ -52,9 +52,9 @@
             </div>
           </div>
         </div>
-      </li>
-    </ul>
-    <div class="p-4 space-y-2">
+      </div>
+    </div>
+    <div class="p-4 space-y-2 flex flex-col justify-center w-full">
       <p class="border-b pb-2">Summary</p>
       <div class="w-auto flex justify-between border-b pb-2">
         <p>Delivery Charges</p>

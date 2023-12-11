@@ -60,6 +60,7 @@ const register = () => {
       })
         .then(() => {
           alert('Successful Sign In!')
+          window.location.reload()
           router.push('/')
         })
         .catch((error) => {
@@ -76,6 +77,7 @@ const signInWithGoogle = () => {
   signInWithPopup(getAuth(), provider)
     .then(() => {
       alert('Successful Sign In!')
+      window.location.reload()
       router.push('/')
     })
     .catch((error) => {

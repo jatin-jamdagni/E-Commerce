@@ -14,6 +14,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@vue-stripe/vue-stripe": "^4.5.0",
     "firebase": "^10.7.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.4",

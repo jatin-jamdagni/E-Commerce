@@ -1,8 +1,13 @@
 <template>
   <div>
-    <div class="p-6 flex flex-col md:flex-row border-2">
+    <button
+      class="py-2 border-2 w-fit px-4 border-orange-500 rounded-md active:bg-orange-500 active:text-white hover:shadow-md active:sm active:shadow-orange-500 shadow-lg"
+    >
+      Continue Shoping
+    </button>
+    <div class="p-6 flex flex-col md:flex-row">
       <div
-        class="p-6 relative w-full md:h-[50%] overflow-hidden flex items-center justify-center md:w-[50%]"
+        class="p-6 relative w-full md:h-[50%] overflow-hidden flex items-center justify-center md:w-[50%] border-2"
       >
         <div v-if="slides.length > 0" class="flex p-4 justify-center items-center">
           <transition name="fade" mode="out-in">
@@ -37,7 +42,7 @@
           />
         </div>
       </div>
-      <div class="p-6 space-y-2 md:w-[50%] flex flex-col justify-center">
+      <div class="p-6 space-y-2 md:w-[50%] flex flex-col justify-center border-2">
         <h2 class="font-bold text-xl">{{ selectedProduct?.title }}</h2>
         <div class="flex space-x-6">
           <h2 class="text-blue-500 font-semibold">
@@ -60,7 +65,7 @@
           </p>
         </div>
 
-        <div class="flex flex-col md:flex-row justify-around py-3 px-4 gap-y-4 md:gap-y-0">
+        <div class="flex flex-col md:flex-row justify-around py-3 gap-y-4 md:gap-y-0">
           <button
             @click="addToCartfn(selectedProduct)"
             class="active:bg-blue-500 py-2 border-2 border-blue-500 text-blue-500 rounded-lg active:text-white px-4 duration-300"
