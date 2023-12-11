@@ -95,7 +95,7 @@ const togglePopup = () => {
 }
 
 onMounted(async () => {
-  await store.fetchProducts()
+  await store.fetchProducts(100)
   await store.fetchCategory()
   updateDisplayedProducts()
 })

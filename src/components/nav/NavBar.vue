@@ -16,7 +16,7 @@
         </ul>
 
         <!-- cart -->
-        <button v-if="isLoggedIn" @click="navigateTo('/cart')">
+        <button v-if="isLoggedIn" @click="navigateTo('/cart')" class="flex">
           <svg
             width="24"
             height="24"
@@ -38,6 +38,7 @@
               stroke-linejoin="round"
             />
           </svg>
+          ({{ useProductStore().cartItems.length }})
         </button>
 
         <!-- Pop -->
@@ -118,6 +119,7 @@
 import useUserCrediential from '@/stores/authStore'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useProductStore } from '@/stores/productStore'
 
 const isPopupVisible = ref(false)
 const router = useRouter()

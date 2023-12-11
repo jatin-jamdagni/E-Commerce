@@ -1,17 +1,17 @@
 <template>
-  <main class="px-10 w-auto space-y-10">
+  <main class="space-y-10">
     <h2 class="text-center font-bold text-2xl my-4">Cart</h2>
-    <ul class="max-h-[55vh] border-2 border-red-600 overflow-y-scroll">
+    <ul class="max-h-[55vh] overflow-y-scroll web p-4">
       <li v-for="item in cartItems" :key="item.id">
         <div
           class="flex justify-around md:justify-between md:px-24 py-4 items-center space-x-4 border-b shadow-md"
         >
-          <div class="flex items-center space-x-12">
+          <div class="flex items-center space-x-6">
             <figure class="w-24 h-24 flex justify-center items-center bg-gray-100">
               <img
                 :src="item.thumbnail"
                 :alt="item.title"
-                class="mix-blend-multiply hover:cursor-pointer"
+                class="mix-blend-multiply hover:cursor-pointer object-contain w-[100px]"
                 @click="goToProductPage(item.id)"
               />
             </figure>
@@ -65,9 +65,17 @@
         <span>${{ calculateTotal() }}</span>
       </div>
       <button
+        v-if="isLoggedIn"
         class="w-full py-1 border-2 border-orange-500 rounded-md active:bg-orange-500 active:text-white hover:shadow-md active:sm active:shadow-orange-500 shadow-lg"
       >
-        {{ isLoggedIn ? 'Proceed to Checkout' : 'Login to Checkout' }}
+        Proceed to Checkout
+      </button>
+      <button
+        v-else
+        @click="router.push('/signIn')"
+        class="w-full py-1 border-2 border-orange-500 rounded-md active:bg-orange-500 active:text-white hover:shadow-md active:sm active:shadow-orange-500 shadow-lg"
+      >
+        Login to Checkout
       </button>
     </div>
   </main>
