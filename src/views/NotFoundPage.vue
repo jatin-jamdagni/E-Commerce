@@ -1,7 +1,7 @@
 import type router from '@/router';
 <template>
   <div class="flex justify-center py-4 bg-black">
-    <video autoplay muted loop class="h-[50vh]">
+    <video autoplay muted loop class="h-[45vh]">
       <source src="/notfound.mp4" />
     </video>
   </div>

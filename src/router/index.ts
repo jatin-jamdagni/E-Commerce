@@ -21,7 +21,19 @@ const router = createRouter({
       children: [
         { path: '', name: 'Home', component: Home },
         { path: 'cart', name: 'Cart', component: Cart },
-        { path: 'product/:id', name: 'ProductView', component: Product },
+        {
+          path: 'product/:id',
+          name: 'ProductView',
+          component: Product,
+          beforeEnter: (to, from, next) => {
+            const productId = Number(to.params.id)
+            if (isNaN(productId)) {
+              next({ name: 'notfound' })
+            } else {
+              next()
+            }
+          }
+        },
         { path: 'shop', name: 'Shop', component: ShopPage },
         { path: 'purchase', name: 'Purchase', component: MyPurchase, meta: { requiresAuth: true } },
         {
@@ -36,7 +48,7 @@ const router = createRouter({
 
     { path: '/signIn', name: 'SignIn', component: SignIn },
     { path: '/signUp', name: 'SignUp', component: SignUp },
-    { path: '/:pathMatch(.*)', name: 'notfound', component: NotFoundPage }
+    { path: '/:pathMatch(.*)*', name: 'notfound', component: NotFoundPage }
   ]
 })
 

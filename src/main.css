@@ -10,6 +10,9 @@
   font-family: 'Jost', sans-serif;
   font-family: 'Syne', sans-serif;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 :root {
   width: 100vw;

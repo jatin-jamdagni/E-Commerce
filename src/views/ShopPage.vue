@@ -57,15 +57,13 @@
     </div>
 
     <!-- Products Display -->
-    <div
-      class="flex h-auto flex-col md:flex-row flex-wrap justify-around items-center space-y-6 p-2"
-    >
+    <div class="flex h-auto flex-col md:flex-row flex-wrap justify-around items-center gap-y-6 p-2">
       <template v-if="displayedProducts.value && displayedProducts.value.length > 0">
         <div
           v-for="product in displayedProducts.value"
           :key="product.id"
           @click="goToProductPage(product.id)"
-          class="flex flex-col md:flex-row flex-wrap space-y-4 justify-evenly md:space-x-4 items-center"
+          class="flex flex-col md:flex-row flex-wrap gap-y-4 justify-evenly md:space-x-4 items-center"
         >
           <ProductContainer :productData="product" @item-clicked="goToProductPage" />
         </div>
@@ -137,6 +135,7 @@ const highToLowProducts = () => {
 
 const goToProductPage = (id: number) => {
   router.push({ name: 'ProductView', params: { id } })
+  window.scrollTo(0, 0)
 }
 </script>
 

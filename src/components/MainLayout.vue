@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-full w-fit overflow-hidden">
+  <div class="relative h-full w-screen overflow-hidden">
     <!-- Nromal Routes -->
     <Navbar />
     <div class="overflow-hidden">

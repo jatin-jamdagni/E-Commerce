@@ -1,6 +1,9 @@
 <!-- ProductContainer.vue -->
 <template>
-  <main @click="goToProductPage(productData.id)" class="w-80 flex rounded-lg shadow-lg">
+  <main
+    @click="goToProductPage(productData.id)"
+    class="w-80 flex rounded-lg shadow-lg active:scale-105 duration-300"
+  >
     <div
       class="relative flex flex-col rounded-xl bg-gray-50 p-4 w-full justify-center h-96 space-y-4 pb-4"
     >
@@ -19,7 +22,7 @@
         <h2 class="text-lg font-semibold">{{ productData.title }}</h2>
         <div class="flex space-x-4">
           <h2 class="font-semibold">$ {{ productData.price }}</h2>
-          <h2 class="text-green-500">{{ productData.discountPercentage }}%</h2>
+          <h2 class="text-green-500">{{ productData.discountPercentage }}% off</h2>
         </div>
         <h2 class="truncate">{{ productData.description }}</h2>
       </div>
