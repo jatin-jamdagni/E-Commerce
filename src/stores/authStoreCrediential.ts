@@ -46,7 +46,6 @@ export default function useUserCrediential() {
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
-      window.location.reload()
       router.push('/')
     })
   }
