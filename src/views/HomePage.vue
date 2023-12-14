@@ -41,10 +41,9 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-// import type{}
 const router = useRouter()
 
-const targetDate: { value: Date } = ref(new Date(new Date().getTime() + 24 * 60 * 60 * 1000)) // Next day
+const targetDate: { value: Date } = ref(new Date(new Date().getTime() + 24 * 60 * 60 * 1000))
 const days = ref(0)
 const hours = ref(0)
 const minutes = ref(0)

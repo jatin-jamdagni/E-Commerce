@@ -1,40 +1,27 @@
-import router from '@/router'
-import { getAuth, onAuthStateChanged, signOut, type Auth } from 'firebase/auth'
-import { onMounted, ref } from 'vue'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
-export default function useUserCrediential() {
-  const firstName: { value: string } = ref('')
-  const lastName: { value: string } = ref('')
-  const email: { value: string } = ref('')
+export const useUserStore = defineStore('auth', () => {
+  const isLoggedIn = ref<boolean>(false)
+  const userEmail = ref<string>()
+  const userId = ref<string>()
 
-  const isLoggedIn: { value: boolean } = ref(false)
-
-  let auth: Auth
-  onMounted(() => {
-    auth = getAuth()
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        isLoggedIn.value = true
-        ;[firstName.value, lastName.value] = user.displayName?.split(' ') || ''
-        email.value = user.email || ' '
-      } else {
-        isLoggedIn.value = false
-      }
-    })
-  })
-
-  const handleSignOut = () => {
-    signOut(auth).then(() => {
-      window.location.reload()
-      router.push('/')
-    })
+  const getUserLogin = (isLogin: boolean) => {
+    isLoggedIn.value = isLogin
+  }
+  const getUserMail = (email: string) => {
+    userEmail.value = email
+  }
+  const getUserId = (id: string) => {
+    userId.value = id
   }
 
   return {
-    firstName,
-    lastName,
-    email,
+    getUserLogin,
     isLoggedIn,
-    handleSignOut
+    userEmail,
+    userId,
+    getUserMail,
+    getUserId
   }
-}
+})

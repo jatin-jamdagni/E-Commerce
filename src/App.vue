@@ -6,7 +6,14 @@
 </template>
 
 <script setup lang="ts">
+import { onBeforeMount, onMounted } from 'vue'
 import { RouterView } from 'vue-router'
-
-// import NavBar from './components/home/NavBar.vue'
+import { useUserStore } from './stores/authStore'
+import useUserCrediential from './stores/authStoreCrediential'
+import { useProductStore } from './stores/productStore'
+onMounted(() => {
+  useUserCrediential()
+  useUserStore()
+  useProductStore()
+})
 </script>

@@ -66,6 +66,7 @@
       </div>
       <button
         v-if="isLoggedIn"
+        @click="handleTransection"
         class="w-full py-2 border-2 border-orange-500 rounded-md active:bg-orange-500 text-orange-500 active:text-white hover:shadow-md active:sm active:shadow-orange-500 shadow-lg duration-300"
       >
         Proceed to Checkout
@@ -93,15 +94,15 @@ import { computed, onMounted } from 'vue'
 import { useProductStore } from '@/stores/productStore'
 import type { CartItemTypes } from '@/types'
 import { useRouter } from 'vue-router'
-import useUserCrediential from '@/stores/authStore'
+import useUserCrediential from '@/stores/authStoreCrediential'
 
 const { isLoggedIn } = useUserCrediential()
 
 const store = useProductStore()
 const router = useRouter()
 const cartItems = computed(() => store.cartItems)
-onMounted(() => {
-  store.loadCartFromLocalStorage()
+onMounted(async () => {
+  await store.loadCartFromLocalStorage()
 })
 
 const subtractFromCart = (id: number) => {
@@ -123,6 +124,13 @@ const calculateTotal = () => {
 
 const goToProductPage = (id: number) => {
   router.push({ name: 'ProductView', params: { id } })
+}
+
+const handleTransection = () => {
+  const totalTransectionAmt = calculateTotal()
+  store.addTrasection(totalTransectionAmt)
+  alert(`Thanks for Shoping \n Your totalTransection Amount: ${totalTransectionAmt}`)
+  router.push('/')
 }
 </script>
 

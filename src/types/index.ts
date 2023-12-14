@@ -26,3 +26,16 @@ export interface CartItemTypes {
   images: string[]
   quantity: number
 }
+export interface OrderTypes {
+  id: number
+  transectionId: number
+  price: number
+  thumbnail: string
+  quantity: number
+  total: number
+}
+export interface TransectionTypes {
+  transectionId: string
+  orderList: CartItemTypes[]
+  totalTransection: number
+}

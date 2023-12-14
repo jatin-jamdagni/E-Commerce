@@ -118,17 +118,15 @@
 </template>
 
 <script setup lang="ts">
-import useUserCrediential from '@/stores/authStore'
+import useUserCrediential from '@/stores/authStoreCrediential'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useProductStore } from '@/stores/productStore'
 
 const isPopupVisible = ref(false)
 const router = useRouter()
-
-const store = ref([])
-
 onMounted(() => {
+  useUserCrediential()
   useProductStore().loadCartFromLocalStorage()
 })
 
@@ -146,6 +144,7 @@ const { isLoggedIn, handleSignOut } = useUserCrediential()
 const handleLogout = async () => {
   await handleSignOut()
   isPopupVisible.value = false
+  navigateTo('/')
 }
 </script>
 

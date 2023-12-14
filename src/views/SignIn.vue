@@ -58,6 +58,7 @@ const signInWithGoogle = () => {
     .then(() => {
       alert('Succesfull SignIn!')
       window.location.reload()
+
       router.push('/')
     })
     .catch((error) => {
