@@ -5,11 +5,17 @@
       <p v-if="errMsg">{{ errMsg }}</p>
       <input class="inputs" type="email" placeholder="E-mail" v-model="email" required />
       <input class="inputs" type="password" placeholder="Password" v-model="password" required />
-      <button type="submit">Submit</button>
+      <button
+        type="submit"
+        class="w-full border-2 py-3 rounded-lg bg-orange-500 text-white shadow-md shadow-orange-500 active:text-orange-500 active:bg-white active:border-orange-500 active:shadow-gray-500"
+      >
+        Submit
+      </button>
     </form>
+    <button type="submit" class="text-blue-800 underline" @click="signInWithGoogle">
+      Sign In with Google.
+    </button>
   </main>
-
-  <button type="submit" @click="signInWithGoogle">Sign In with Google.</button>
 </template>
 
 <script setup lang="ts">

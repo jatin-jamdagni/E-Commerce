@@ -2,17 +2,17 @@
   <main class="flex flex-col justify-center items-center h-screen space-y-10">
     <form @submit.prevent="register" class="flex flex-col justify-center items-center space-y-10">
       <h1 class="text-center text-[32px] font-semibold">SignUp To Account</h1>
-      <div class="flex flex-col md:flex-row w-auto space-y-10 md:space-y-0 md:space-x-4">
-        <input
-          class="inputs w-40"
-          type="text"
-          placeholder="First Name"
-          v-model="firstName"
-          required
-        />
-        <input class="inputs w-40" type="text" placeholder="Last Name" v-model="lastName" />
-      </div>
-      <input class="inputs w-80" type="email" placeholder="E-mail" v-model="email" required />
+
+      <input
+        class="inputs w-full"
+        type="text"
+        placeholder="First Name"
+        v-model="firstName"
+        required
+      />
+      <input class="inputs w-full" type="text" placeholder="Last Name" v-model="lastName" />
+
+      <input class="inputs w-full" type="email" placeholder="E-mail" v-model="email" required />
       <input
         class="inputs w-80"
         type="password"
@@ -21,14 +21,14 @@
         required
       />
       <button
-        class="py-4 px-6 w-80 font-semibold active:bg-orange-500 active:text-white text-orange-500 border-orange-500 border-2 shadow-orange-200 shadow-md rounded-md"
+        class="w-full border-2 py-3 rounded-lg bg-orange-500 text-white shadow-md shadow-orange-500 active:text-orange-500 active:bg-white active:border-orange-500 active:shadow-gray-500"
         type="submit"
       >
         Submit
       </button>
     </form>
 
-    <button @click="signInWithGoogle">Sign In with Google.</button>
+    <button @click="signInWithGoogle" class="text-blue-800 underline">Sign Up with Google.</button>
   </main>
 </template>
 
