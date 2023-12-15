@@ -1,14 +1,15 @@
 import type router from '@/router';
 <template>
-  <div class="flex justify-center py-4 bg-black">
-    <video autoplay muted loop class="h-[45vh]">
+  <!-- <div class="flex justify-center py-4 bg-black"> -->
+  <!-- <video autoplay muted loop class="h-[45vh]">
       <source src="/notfound.mp4" />
     </video>
-  </div>
-  <div class="flex flex-col justify-center items-center w-auto">
+  </div> -->
+  <div class="flex flex-col justify-center items-center w-auto h-screen">
     <h1 class="text-center text-[28px] font-semibold">
-      <span class="text-orange-500">Bhai! </span>Tu
-      <span class="uppercase text-red-600">not found</span> page pe aagya.
+      <!-- <span class="text-orange-500">Bhai! </span>Tu -->
+      <!-- <span class="uppercase text-red-600">not found</span> page par aagya. -->
+      <span class="uppercase text-red-600">not found</span>
     </h1>
     <img src="/no-results.png" alt="Not Found" class="h-56 drop-shadow-xl hover:drop-shadow-sm" />
     <div class="flex space-x-10">

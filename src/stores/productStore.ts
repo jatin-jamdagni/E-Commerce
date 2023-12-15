@@ -102,7 +102,7 @@ export const useProductStore = defineStore('product', () => {
     }
   }
 
-  const addTrasection = (totalTransectionAmt: number) => {
+  const addTrasection = (totalTransectionAmt: number | 0) => {
     const date = new Date()
     const userStore = useUserStore()
     const id = `${date.getTime()}-${userStore.userEmail || ''}`

@@ -74,6 +74,7 @@
             Add to Cart
           </button>
           <button
+            @click="handleTransection(selectedProduct?.price || 0)"
             class="active:bg-green-500 py-2 border-2 border-green-500 text-green-500 rounded-lg active:text-white px-7 duration-300"
           >
             Buy Now
@@ -116,6 +117,12 @@ const relatedItem = computed(() => {
     (item) => item.category !== undefined && item.category === selectedProduct.value?.category
   )
 })
+
+const handleTransection = (price: number) => {
+  store.addTrasection(price)
+  alert(`Thanks for Shoping \nYour totalTransection Amount: ${price}`)
+  router.push('/')
+}
 
 const goToProductPage = (id: number) => {
   router.push({ name: 'ProductView', params: { id } })

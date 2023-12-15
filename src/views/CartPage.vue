@@ -1,7 +1,7 @@
 <template>
   <h2 class="text-center font-bold text-2xl my-4 underline">Cart</h2>
   <main class="space-y-10 flex flex-col md:flex-row">
-    <div class="max-h-[55vh] overflow-y-scroll web p-4 w-full">
+    <div v-if="cartItems.length" class="max-h-[55vh] overflow-y-scroll web p-4 w-full">
       <div v-for="item in cartItems" :key="item.id">
         <div
           class="flex justify-around md:justify-between md:px-24 py-4 items-center space-x-4 border-b shadow-md w-full"
@@ -54,6 +54,9 @@
         </div>
       </div>
     </div>
+    <div v-else class="w-full">
+      <h1 class="text-center font-bold">No Item in Cart.</h1>
+    </div>
     <div class="p-4 space-y-2 flex flex-col justify-center w-full">
       <p class="border-b pb-2">Summary</p>
       <div class="w-auto flex justify-between border-b pb-2">
@@ -66,7 +69,7 @@
       </div>
       <button
         v-if="isLoggedIn"
-        @click="handleTransection"
+        @click="handleTransection(cartItems.length)"
         class="w-full py-2 border-2 border-orange-500 rounded-md active:bg-orange-500 text-orange-500 active:text-white hover:shadow-md active:sm active:shadow-orange-500 shadow-lg duration-300"
       >
         Proceed to Checkout
@@ -126,11 +129,16 @@ const goToProductPage = (id: number) => {
   router.push({ name: 'ProductView', params: { id } })
 }
 
-const handleTransection = () => {
+const handleTransection = (length: number) => {
   const totalTransectionAmt = calculateTotal()
-  store.addTrasection(totalTransectionAmt)
-  alert(`Thanks for Shoping \n Your totalTransection Amount: ${totalTransectionAmt}`)
-  router.push('/')
+  if (length) {
+    store.addTrasection(totalTransectionAmt)
+    alert(`Thanks for Shoping \nYour totalTransection Amount: ${totalTransectionAmt}`)
+    router.push('/')
+  } else {
+    alert('Please Add item to the cart Before Checkout')
+    router.push('/shop')
+  }
 }
 </script>
 

@@ -4,8 +4,6 @@ import Layout from '@/components/MainLayout.vue'
 import Home from '@/views/HomePage.vue'
 import Cart from '@/views/CartPage.vue'
 import Product from '@/views/ProductDetails.vue'
-import MyPurchase from '@/views/MyPurchase.vue'
-import MyOrders from '@/views/MyOrders.vue'
 import SignIn from '@/views/SignIn.vue'
 import SignUp from '@/views/SignUp.vue'
 import ProfilePage from '@/views/ProfilePage.vue'
@@ -35,13 +33,7 @@ const router = createRouter({
           }
         },
         { path: 'shop', name: 'Shop', component: ShopPage },
-        { path: 'purchase', name: 'Purchase', component: MyPurchase, meta: { requiresAuth: true } },
-        {
-          path: 'order',
-          name: 'Orders',
-          component: MyOrders,
-          meta: { requiresAuth: true }
-        },
+
         { path: 'user', name: 'userProfile', component: ProfilePage, meta: { requiresAuth: true } }
       ]
     },

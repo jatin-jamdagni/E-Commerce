@@ -2,7 +2,7 @@
   <div
     class="flex flex-col-reverse md:flex-row h-[73.5vh] lg:h-[68.8vh] w-full border-2 border-red-400 items-start relative"
   >
-    <div class="flex flex-col w-full justify-start gap-y-4">
+    <div class="flex flex-col w-full h-full justify-center items-center gap-y-4">
       <button @click="showContainer(1)" class="btn">Profile</button>
       <button @click="showContainer(2)" class="btn">My Transections</button>
       <button @click="router.push('/cart')" class="btn">My Cart</button>
@@ -50,7 +50,7 @@
           <div
             :class="[
               openPopUps[transactionIndex] ? 'absolute' : 'hidden',
-              'right-2 left-2 top-4 bottom-0 px-4 py-12 bg-gray-100 shadow-xl rounded-xl '
+              'right-2 left-2 top-4 bottom-0 px-4 py-12 bg-gray-100 shadow-2xl shadow-orange-500 rounded-xl border-2 border-orange-500 '
             ]"
           >
             <div class="flex flex-col md:flex-row w-full justify-around">
