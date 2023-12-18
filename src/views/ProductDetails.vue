@@ -74,7 +74,7 @@
             Add to Cart
           </button>
           <button
-            @click="handleTransection(selectedProduct?.price || 0)"
+            @click="handleTransection(selectedProduct?.price || 0, selectedProduct?.id || 0)"
             class="active:bg-green-500 py-2 border-2 border-green-500 text-green-500 rounded-lg active:text-white px-7 duration-300"
           >
             Buy Now
@@ -99,6 +99,8 @@ import ProductContainer from '@/components/shop/ProductContainer.vue'
 import { useProductStore } from '@/stores/productStore'
 import { useRoute, useRouter } from 'vue-router'
 import type { ProductTypes } from '@/types'
+import useUserCrediential from '@/stores/authStoreCrediential'
+import { useUserStore } from '@/stores/authStore'
 const store = useProductStore()
 const router = useRouter()
 const route = useRoute()
@@ -118,10 +120,15 @@ const relatedItem = computed(() => {
   )
 })
 
-const handleTransection = (price: number) => {
-  store.addTrasection(price)
-  alert(`Thanks for Shoping \nYour totalTransection Amount: ${price}`)
-  router.push('/')
+const handleTransection = (price: number, id: number) => {
+  // store.addTrasection(price)
+  if (useUserStore().isLoggedIn) {
+    store.addDirectTrasection(price, id)
+    alert(`Thanks for Shoping \nYour totalTransection Amount: ${price}`)
+    router.push('/')
+  } else {
+    router.push('/signIn')
+  }
 }
 
 const goToProductPage = (id: number) => {

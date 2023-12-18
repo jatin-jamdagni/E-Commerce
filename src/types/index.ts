@@ -31,11 +31,11 @@ export interface OrderTypes {
   transectionId: number
   price: number
   thumbnail: string
-  quantity: number
+  quantity?: number | 1
   total: number
 }
 export interface TransectionTypes {
   transectionId: string
-  orderList: CartItemTypes[]
+  orderList: CartItemTypes | CartItemTypes[]
   totalTransection: number
 }
