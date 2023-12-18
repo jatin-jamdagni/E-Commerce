@@ -36,6 +36,6 @@ export interface OrderTypes {
 }
 export interface TransectionTypes {
   transectionId: string
-  orderList: CartItemTypes | CartItemTypes[]
+  orderList: CartItemTypes[]
   totalTransection: number
 }

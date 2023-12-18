@@ -116,25 +116,25 @@ export const useProductStore = defineStore('product', () => {
 
     saveOrderToLocalStorage()
   }
-  const addDirectTrasection = (totalTransectionAmt: number | 0, Pid: number) => {
-    const date = new Date()
-    const userStore = useUserStore()
+  // const addDirectTrasection = (totalTransectionAmt: number | 0, Pid: number) => {
+  //   const date = new Date()
+  //   const userStore = useUserStore()
 
-    const id = `${date.getTime()}-${userStore.userEmail || ''}`
+  //   const id = `${date.getTime()}-${userStore.userEmail || ''}`
 
-    const data = products.value.find((item) => item.id === Pid)
-    console.log('this', data)
-    // const quantity: number = 1
+  //   const data = products.value.find((item) => item.id === Pid)
+  //   console.log('this', data)
+  //   // const quantity: number = 1
 
-    const transaction: TransectionTypes = {
-      transectionId: id,
-      orderList: data as CartItemTypes,
-      totalTransection: totalTransectionAmt
-    }
-    transections.value.push(transaction)
+  //   const transaction: TransectionTypes = {
+  //     transectionId: id,
+  //     orderList: data as CartItemTypes,
+  //     totalTransection: totalTransectionAmt
+  //   }
+  //   transections.value.push(transaction)
 
-    saveOrderToLocalStorage()
-  }
+  //   saveOrderToLocalStorage()
+  // }
 
   const loadOrderFromLocalStorage = () => {
     const userStore = useUserStore()
@@ -166,7 +166,7 @@ export const useProductStore = defineStore('product', () => {
     loadOrderFromLocalStorage,
     saveOrderToLocalStorage,
     addTrasection,
-    addDirectTrasection,
+    // addDirectTrasection,
     products,
     cartItems,
     categories,

@@ -121,13 +121,13 @@ const relatedItem = computed(() => {
 })
 
 const handleTransection = (price: number, id: number) => {
-  if (useUserStore().isLoggedIn) {
-    store.addDirectTrasection(price, id)
-    alert(`Thanks for Shoping \nYour totalTransection Amount: ${price}`)
-    router.push('/')
-  } else {
-    router.push('/signIn')
-  }
+  // if (useUserStore().isLoggedIn) {
+  store.addTrasection(price)
+  alert(`Thanks for Shoping \nYour totalTransection Amount: ${price}`)
+  router.push('/')
+  // } else {
+  //   router.push('/signIn')
+  // }
 }
 
 const goToProductPage = (id: number) => {

@@ -79,7 +79,7 @@
             <div class="py-4 border-2 w-full h-[50vh] relative">
               <h1 class="font-semibold text-center">Ordered Items :</h1>
               <div class="py-1 w-full absolute h-full overflow-y-scroll">
-                <div v-for="(order, index) in transaction.orderList" :key="index">
+                <div v-for="order in transaction.orderList" :key="order.id">
                   <div
                     class="flex justify-around md:justify-between md:px-24 py-4 items-center space-x-4 border-b shadow-md w-full"
                   >
