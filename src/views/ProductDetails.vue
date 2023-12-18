@@ -121,7 +121,6 @@ const relatedItem = computed(() => {
 })
 
 const handleTransection = (price: number, id: number) => {
-  // store.addTrasection(price)
   if (useUserStore().isLoggedIn) {
     store.addDirectTrasection(price, id)
     alert(`Thanks for Shoping \nYour totalTransection Amount: ${price}`)
