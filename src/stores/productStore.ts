@@ -1,4 +1,4 @@
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useUserStore } from './authStore'
 import type { CartItemTypes, OrderTypes, ProductTypes, TransectionTypes } from '@/types'
 import { defineStore } from 'pinia'
@@ -6,7 +6,6 @@ import { defineStore } from 'pinia'
 export const useProductStore = defineStore('product', () => {
   const products = ref<ProductTypes[]>([])
   const cartItems = ref<CartItemTypes[]>([])
-  const orders = ref<OrderTypes[]>([])
   const transections = ref<TransectionTypes[]>([])
   const categories = ref<string[]>([])
 

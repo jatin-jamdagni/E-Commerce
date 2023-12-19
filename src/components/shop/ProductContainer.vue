@@ -5,7 +5,7 @@
     class="w-80 flex rounded-lg shadow-lg active:scale-105 duration-300"
   >
     <div
-      class="relative flex flex-col rounded-xl bg-gray-50 p-4 w-full justify-center h-96 space-y-4 pb-4"
+      class="relative flex flex-col rounded-xl bg-gray-50 p-4 w-full justify-center h-[450px] space-y-4 pb-4"
     >
       <span
         class="absolute px-4 py-2 bg-orange-200 rounded-bl-2xl rounded-tr-2xl right-0 top-0 mix-blend-exclusion font-bold"
@@ -26,6 +26,12 @@
         </div>
         <h2 class="truncate">{{ productData.description }}</h2>
       </div>
+      <button
+        @click="goToProductPage(productData.id)"
+        class="py-2 w-full bg-white active:bg-orange-500 text-orange-500 active:text-white rounded-lg shadow-md shadow-orange-300 active:shadow-white"
+      >
+        View Product
+      </button>
     </div>
   </main>
   <!-- <main
