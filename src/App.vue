@@ -1,7 +1,13 @@
 <template>
   <main class="relative">
     <!-- <RouterView /> -->
-    <router-view />
+    <!-- <router-view /> -->
+
+    <div class=" flex justify-center items-center h-screen w-screen bg-black">
+      <p class=" font-bold text-3xl text-violet-800 text-center">
+        Welcome to building new Ecommerce portal
+      </p>
+    </div>
   </main>
 </template>
 

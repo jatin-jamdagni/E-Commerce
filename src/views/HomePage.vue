@@ -6,6 +6,14 @@
         Get ready for a shopping experience like never before with our Deals of the Month! Every
         purchase comes with exclusive perks and offers, making this month a celebration of savvy
         choices and amazing deals. Don't miss out! 🎁🛒.
+
+
+
+
+
+
+
+        
       </p>
       <div class="countdown">
         <div class="box">
