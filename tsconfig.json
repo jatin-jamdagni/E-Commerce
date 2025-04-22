@@ -8,6 +8,15 @@
     },
     {
       "path": "./apps/auth-service"
+    },
+    {
+      "path": "./apps/api-gateway"
+    },
+    {
+      "path": "./packages/error-middleware"
+    },
+    {
+      "path": "./packages/libs"
     }
   ]
 }

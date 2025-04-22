@@ -1,4 +1,4 @@
-# 
+# Eshop
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
@@ -8,7 +8,7 @@
 
 ## Finish your CI setup
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/LHjiSlLZyh)
+[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/wsJy9uq8D8)
 
 
 ## Run tasks
@@ -16,19 +16,19 @@
 To run the dev server for your app, use:
 
 ```sh
-npx nx serve auth-service
+npx nx serve eshop
 ```
 
 To create a production bundle:
 
 ```sh
-npx nx build auth-service
+npx nx build eshop
 ```
 
 To see all available targets to run for a project, run:
 
 ```sh
-npx nx show project auth-service
+npx nx show project eshop
 ```
 
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.

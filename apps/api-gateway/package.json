@@ -1,5 +1,5 @@
 {
-  "name": "@eshop/auth-service",
+  "name": "@eshop/api-gateway",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -11,21 +11,16 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@eshop/auth-service:build",
+          "buildTarget": "@eshop/api-gateway:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@eshop/auth-service:build:development"
+            "buildTarget": "@eshop/api-gateway:build:development"
           },
           "production": {
-            "buildTarget": "@eshop/auth-service:build:production"
+            "buildTarget": "@eshop/api-gateway:build:production"
           }
-        }
-      },
-      "test": {
-        "options": {
-          "passWithNoTests": true
         }
       }
     }

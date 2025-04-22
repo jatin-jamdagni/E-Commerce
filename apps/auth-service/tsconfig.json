@@ -4,6 +4,12 @@
   "include": [],
   "references": [
     {
+      "path": "../../packages/error-middleware"
+    },
+    {
+      "path": "../../packages/libs"
+    },
+    {
       "path": "./tsconfig.app.json"
     },
     {
