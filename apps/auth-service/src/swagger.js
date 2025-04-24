@@ -1,4 +1,3 @@
-import { version } from "os";
 import swaggerAutogen from "swagger-autogen";
 
 const doc = {
@@ -7,7 +6,7 @@ const doc = {
     description: "Authentication and Authorization Service",
     version:"1.0.0",
   },
-  host: "localhost:6001",
+  host: "localhost:6001/api",
   schemes: ["http"],
 };
 

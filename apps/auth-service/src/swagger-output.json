@@ -5,11 +5,13 @@
     "description": "Authentication and Authorization Service",
     "version": "1.0.0"
   },
-  "host": "localhost:6001",
+  "host": "localhost:6001/api",
   "basePath": "/",
-  "schemes": ["http"],
+  "schemes": [
+    "http"
+  ],
   "paths": {
-    "/api/user-registeration": {
+    "/user-registeration": {
       "post": {
         "description": "",
         "parameters": [
@@ -20,10 +22,73 @@
               "type": "object",
               "properties": {
                 "name": {
-                  "example": "Jatin"
+                  "example": "any"
                 },
                 "email": {
-                  "example": "jatin@example.com"
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/verify-user": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "otp": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/login-user": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
                 }
               }
             }

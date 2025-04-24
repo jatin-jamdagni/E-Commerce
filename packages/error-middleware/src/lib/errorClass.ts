@@ -29,14 +29,14 @@ export class NotFoundError extends AppError {
 // Validation error
 export class ValidationError extends AppError {
   constructor(message?: string, details?: string) {
-    super(message = "Invalid request data", 400, true, details);
+    super(message = message ?? "Invalid request data", 400, true, details);
   }
 }
 
 // Authentication error
 export class AuthenticationError extends AppError {
-  constructor(message: "Unauthorized access") {
-    super(message, 401);
+  constructor(message?: string) {
+    super(message ?? "Unauthorized access", 401);
   }
 }
 
