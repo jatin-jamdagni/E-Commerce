@@ -1,7 +1,7 @@
 
 
 import { NextFunction, Request, Response } from "express";
-import { checkOtpRestrictions, handleForgotPassword, sendOtp, trackOtpRequest, validateRegistrationData, verifyOTP } from "../utils/auth.helper";
+import { checkOtpRestrictions, handleForgotPassword, sendOtp, trackOtpRequest, validateRegistrationData, verifyForgetPasswordOTP, verifyOTP } from "../utils/auth.helper";
 import { prisma } from "@eshop/libs";
 import { AuthenticationError, ValidationError } from "@eshop/error-middleware";
 import bcrypt from "bcryptjs"
@@ -155,4 +155,51 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
 
 export const userForgetPassword = async (req: Request, res: Response, next: NextFunction) => {
   handleForgotPassword(req, res, next, "user");
+}
+
+export const verifyUserForgetPassword = async (req: Request, res: Response, next: NextFunction) => {
+
+  await verifyForgetPasswordOTP(req, res, next);
+
+  }
+
+
+export const userResetPassword = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return next(new ValidationError("Email and Password are required!"))
+    }
+    const existingUser = await prisma.users.findUnique({
+      where: { email }
+    })
+    if (!existingUser) {
+      return next(new ValidationError("User not exists!"))
+    }
+
+    const isSamePassword = await bcrypt.compare(password, existingUser.password!);
+    if (isSamePassword) {
+      return next(new ValidationError("New password cannot be same as old password!"))
+    }
+
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const updatedUser = await prisma.users.update({
+      where: { email },
+      data: {
+        password: hashedPassword,
+      }
+    })
+
+    if (!updatedUser) {
+      return next(new ValidationError("Password reset failed!"))
+    }
+    res.status(200).json({
+      message: "Password reset successfully!",
+      success: true,
+    })
+
+  } catch (error) {
+    next(error);
+  }
 }

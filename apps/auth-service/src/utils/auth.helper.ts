@@ -130,3 +130,24 @@ export const handleForgotPassword = async (req: Request, res: Response, next: Ne
     next(error);
   }
 }
+
+
+export const verifyForgetPasswordOTP = async (req: Request, res: Response, next: NextFunction, ) => {
+
+  try {
+
+    const {email, otp} = req.body;
+    if (!email || !otp) {
+      return next(new ValidationError("Email and OTP are required"));
+    }
+    verifyOTP(email, otp, next);
+
+    res.status(200).json({
+      message: "OTP verified successfully, you can now reset your password",
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+
+  }
+}

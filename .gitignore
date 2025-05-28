@@ -44,3 +44,8 @@ Thumbs.db
 test-output
 
 .env
+.env.local
+
+# Next.js
+.next
+out

@@ -1,0 +1,26 @@
+{
+  "name": "@eshop/user-ui",
+  "version": "0.0.1",
+  "private": true,
+  "dev": {
+  "executor": "@nx/next:dev",
+  "options": {
+    "buildTarget": "user-ui:build",
+    "dev": true,
+    "preserveWatchOutput": true
+  }
+},
+"serve": {
+  "executor": "@nx/next:server",
+  "options": {
+    "buildTarget": "user-ui:build",
+    "dev": true,
+    "preserveWatchOutput": true
+  }
+},
+  "dependencies": {
+    "next": "~15.2.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
+  }
+}
