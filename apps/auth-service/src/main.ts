@@ -9,7 +9,7 @@ const swaggerDocument = require("./swagger-output.json");
 const app = express();
 
 app.use(cors({
-  origin: ['http://localhost:3000'],
+  origin: [process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'],
   allowedHeaders: ['Authorization', 'Content-Type'],
   credentials: true,
 }))
@@ -29,7 +29,7 @@ app.use("/api", router);
 
 app.use(errorMiddleware)
 
-const port = process.env.PORT ? Number(process.env.PORT) : 6001;
+const port = process.env.AUTH_PORT ? Number(process.env.AUTH_PORT) : 6001;
 
 const server = app.listen(port, () => {
   console.log(`[ ready ] - Auth service is runing at: http://localhost:${port}/api`);

@@ -28,6 +28,15 @@ const nextConfig = {
   experimental: {
     externalDir: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'e-commerce-jatin.vercel.app',
+        pathname: '/**',
+      },
+    ],
+  }
 };
 
 const plugins = [

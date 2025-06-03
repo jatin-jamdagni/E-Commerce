@@ -17,7 +17,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 app.use(cors(
   {
-    origin: ["http://localhost:3000"],
+    origin: [process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"],
     allowedHeaders: ["Authorization", "Content-Type"],
     credentials: true,
   }
@@ -42,7 +42,7 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-app.use('/', proxy('http://localhost:6001'));
+app.use('/', proxy(process.env.AUTH_API_URL || 'http://localhost:6001'));
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
@@ -50,7 +50,7 @@ app.get('/gateway-header', (req, res) => {
   res.send({ message: 'Welcome to api-gateway!' });
 });
 
-const port = process.env.PORT || 8080;
+const port = process.env.GATEWAY_PORT || 8080;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });

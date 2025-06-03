@@ -3,24 +3,27 @@
   "version": "0.0.1",
   "private": true,
   "dev": {
-  "executor": "@nx/next:dev",
-  "options": {
-    "buildTarget": "user-ui:build",
-    "dev": true,
-    "preserveWatchOutput": true
-  }
-},
-"serve": {
-  "executor": "@nx/next:server",
-  "options": {
-    "buildTarget": "user-ui:build",
-    "dev": true,
-    "preserveWatchOutput": true
-  }
-},
+    "executor": "@nx/next:dev",
+    "options": {
+      "buildTarget": "user-ui:build",
+      "dev": true,
+      "preserveWatchOutput": true
+    }
+  },
+  "serve": {
+    "executor": "@nx/next:server",
+    "options": {
+      "buildTarget": "user-ui:build",
+      "dev": true,
+      "preserveWatchOutput": true
+    }
+  },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
     "next": "~15.2.4",
+    "postcss": "^8.4.31",
     "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "react-dom": "19.0.0",
+    "tailwindcss": "^4.1.8"
   }
 }
