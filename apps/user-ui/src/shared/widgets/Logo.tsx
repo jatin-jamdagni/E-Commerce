@@ -1,20 +1,14 @@
-import Image from 'next/image';
-import React from 'react';
+import type React from "react"
 
-const Logo = () => {
+const Logo: React.FC = () => {
   return (
-    <Image
-      src={
-        process.env.NEXT_PUBLIC_LOGO_URL ||
-        'https://e-commerce-jatin.vercel.app/logo.png'
-      }
-      alt="Logo"
-      width={60}
-      height={15}
-      priority
-      className="object-contain h-10 w-10"
-    />
-  );
-};
+    <div className="flex items-center">
+      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-2">
+        <span className="text-white font-bold text-lg">S</span>
+      </div>
+      <span className="text-xl font-bold text-gray-900">ShopHub</span>
+    </div>
+  )
+}
 
-export default Logo;
+export default Logo

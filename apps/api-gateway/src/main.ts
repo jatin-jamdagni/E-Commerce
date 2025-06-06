@@ -15,19 +15,28 @@ import rateLimit from 'express-rate-limit';
 import cookieParser from 'cookie-parser';
 
 const app = express();
-app.use(cors(
-  {
-    origin: [process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"],
-    allowedHeaders: ["Authorization", "Content-Type"],
-    credentials: true,
-  }
-));
+
+app.use(cors({
+  origin: [
+    process.env.NEXT_PUBLIC_API_URL ||
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+  ],
+  allowedHeaders: ["Authorization", "Content-Type", "X-Requested-With"],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+  optionsSuccessStatus: 200 // For legacy browser support
+}));
+app.options('*', cors());
 
 app.use(cookieParser());
+
 app.use(morgan('dev'));
+
 app.use(express.json({
   limit: "100mb"
 }));
+
 app.use(express.urlencoded({ extended: true, limit: "100mb" }));
 app.set('trust proxy', 1);
 
@@ -42,11 +51,20 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-app.use('/', proxy(process.env.AUTH_API_URL || 'http://localhost:6001'));
+app.use('/', proxy(process.env.AUTH_API_URL || 'http://localhost:6001', {
+  proxyReqOptDecorator(proxyReqOpts, srcReq) {
+
+    return {
+      ...proxyReqOpts,
+      'Access-Control-Allow-Origin': srcReq.headers.origin || "*",
+      'Access-Control-Allow-Credentials': true
+    };
+  },
+}));
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
-app.get('/gateway-header', (req, res) => {
+app.get('/gateway-health', (req, res) => {
   res.send({ message: 'Welcome to api-gateway!' });
 });
 

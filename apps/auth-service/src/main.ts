@@ -6,13 +6,24 @@ import router from './routes/auth.router';
 import cookieParser from 'cookie-parser';
 import swaggerUi from 'swagger-ui-express';
 const swaggerDocument = require("./swagger-output.json");
-const app = express();
+ const app = express();
+
 
 app.use(cors({
-  origin: [process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'],
-  allowedHeaders: ['Authorization', 'Content-Type'],
+  origin: [
+    process.env.GATEWAY_API_URL || 'http://localhost:8080',
+    process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000',
+    "http://localhost:3000", // Your frontend URL
+    "http://127.0.0.1:3000",
+    "http://localhost:8080", // Gateway URL
+  ],
+  allowedHeaders: ['Authorization', 'Content-Type', 'X-Requested-With'],
   credentials: true,
-}))
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+  optionsSuccessStatus: 200
+}));
+
+app.options('*', cors());
 
 
 app.use(express.json());

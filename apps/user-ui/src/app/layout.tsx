@@ -1,6 +1,7 @@
 import Header from '@/shared/widgets/Header';
 import './global.css';
 import { Poppins, Roboto } from 'next/font/google';
+import Providers from './providers';
 export const metadata = {
   title: 'Eshop',
   description:
@@ -27,8 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.variable} ${roboto.variable}`}>
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
   );
