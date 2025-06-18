@@ -29,7 +29,6 @@ const ForgotPasswordPage = () => {
   const [timer, setTimer] = useState(60);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  // const [resetToken, setResetToken] = useState('');
 
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const router = useRouter();

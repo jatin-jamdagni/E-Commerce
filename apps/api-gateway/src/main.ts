@@ -5,7 +5,6 @@
 
 import express from 'express';
 import * as path from 'path';
-
 import cors from 'cors';
 import proxy from 'express-http-proxy';
 import morgan from 'morgan'
@@ -25,8 +24,7 @@ app.use(cors({
   allowedHeaders: ["Authorization", "Content-Type", "X-Requested-With"],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-  optionsSuccessStatus: 200 // For legacy browser support
-}));
+ }));
 app.options('*', cors());
 
 app.use(cookieParser());

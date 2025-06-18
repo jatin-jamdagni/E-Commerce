@@ -5,30 +5,42 @@
     "description": "Authentication and Authorization Service",
     "version": "1.0.0"
   },
-  "host": "localhost:6001/api",
-  "basePath": "/",
+  "host": "localhost:6001",
+  "basePath": "/api",
   "schemes": [
     "http"
   ],
   "paths": {
     "/user-registeration": {
       "post": {
-        "description": "",
+        "summary": "Register a new user",
+        "description": "Registers a new user with name, email, and password. Sends an OTP to the user's email for verification.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
+              "required": [
+                "name",
+                "email",
+                "password"
+              ],
               "properties": {
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "John Doe"
                 },
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "format": "email",
+                  "example": "john.doe@example.com"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "format": "password",
+                  "example": "SecureP@ssw0rd"
                 }
               }
             }
@@ -36,32 +48,52 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK - Please check your email for the OTP."
+          },
+          "400": {
+            "description": "Bad Request - User already exists or validation error."
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/verify-user": {
       "post": {
-        "description": "",
+        "summary": "Verify user registration with OTP",
+        "description": "Verifies the user's email using an OTP received after registration and completes the registration process.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
+              "required": [
+                "email",
+                "otp",
+                "password",
+                "name"
+              ],
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "format": "email",
+                  "example": "john.doe@example.com"
                 },
                 "otp": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "123456"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "format": "password",
+                  "example": "SecureP@ssw0rd"
                 },
                 "name": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "John Doe"
                 }
               }
             }
@@ -69,26 +101,42 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Created - User registered successfully!"
+          },
+          "400": {
+            "description": "Bad Request - User already exists, invalid OTP, or validation error."
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/login-user": {
       "post": {
-        "description": "",
+        "summary": "Login a user",
+        "description": "Authenticates a user with email and password, returning access and refresh tokens.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
+              "required": [
+                "email",
+                "password"
+              ],
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "format": "email",
+                  "example": "john.doe@example.com"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "format": "password",
+                  "example": "SecureP@ssw0rd"
                 }
               }
             }
@@ -96,36 +144,85 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK - Login successful!",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request - Email and password are required or user does not exist."
+          },
+          "401": {
+            "description": "Unauthorized - Invalid password."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/refresh-token-user": {
+      "post": {
+        "summary": "Refresh access token",
+        "description": "Uses a refresh token (expected in cookies) to issue a new access token.",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Created - New access token issued."
+          },
+          "401": {
+            "description": "Unauthorized - No refresh token or invalid token."
+          },
+          "403": {
+            "description": "Forbidden - User/Seller not found or invalid token."
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/forgot-password-user": {
       "post": {
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/reset-password-user": {
-      "post": {
-        "description": "",
+        "summary": "Initiate forgot password process",
+        "description": "Sends an OTP to the user's email to initiate the password reset process.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
+              "required": [
+                "email"
+              ],
               "properties": {
                 "email": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
+                  "type": "string",
+                  "format": "email",
+                  "example": "jitujamdagni@1342@gmail.com"
                 }
               }
             }
@@ -133,26 +230,41 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK - Please check your email for the OTP."
+          },
+          "400": {
+            "description": "Bad Request - User does not exist or validation error."
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
     },
     "/verify-forgot-password-user": {
       "post": {
-        "description": "",
+        "summary": "Verify OTP for forgot password",
+        "description": "Verifies the OTP sent to the user's email for the forgot password process.",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
+              "required": [
+                "email",
+                "otp"
+              ],
               "properties": {
                 "email": {
-                  "example": "any"
+                  "type": "string",
+                  "format": "email",
+                  "example": "john.doe@example.com"
                 },
                 "otp": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "654321"
                 }
               }
             }
@@ -160,7 +272,56 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK - OTP verified successfully."
+          },
+          "400": {
+            "description": "Bad Request - Invalid OTP or email."
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reset-password-user": {
+      "post": {
+        "summary": "Reset user password",
+        "description": "Resets the user's password after successful OTP verification.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "email",
+                "password"
+              ],
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "john.doe@example.com"
+                },
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "example": "NewSecureP@ssw0rd"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Password reset successfully!"
+          },
+          "400": {
+            "description": "Bad Request - Email and password are required, user does not exist, or new password is same as old."
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }

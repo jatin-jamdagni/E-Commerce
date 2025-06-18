@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { prisma } from "@eshop/libs";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import jwt, { JsonWebTokenError } from "jsonwebtoken";
 import {
   checkOtpRestrictions,
   handleForgotPassword,
@@ -13,8 +13,7 @@ import {
 } from "../utils/auth.helper";
 import { AuthenticationError, ValidationError } from "@eshop/error-middleware";
 import { setCookies } from "../utils/cookies/setCookies";
-
-export const userRegistrationController = async (req: Request, res: Response, next: NextFunction) => {
+export const userRegistrationController = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   try {
     const { name, email, password } = req.body;
     validateRegistrationData({ name, email, password }, "user");
@@ -38,7 +37,7 @@ export const userRegistrationController = async (req: Request, res: Response, ne
   }
 };
 
-export const verifyUser = async (req: Request, res: Response, next: NextFunction) => {
+export const verifyUser = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   try {
     const { email, otp, password, name } = req.body;
     validateRegistrationData({ email, password, name }, "user");
@@ -75,7 +74,7 @@ export const verifyUser = async (req: Request, res: Response, next: NextFunction
   }
 };
 
-export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
+export const loginUser = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   try {
     const { email, password } = req.body;
 
@@ -124,15 +123,78 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
   }
 };
 
-export const userForgetPassword = async (req: Request, res: Response, next: NextFunction) => {
+export const refreshToken = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+  try {
+
+    const refreshToken = await req.cookies.refreshToken;
+
+    if (!refreshToken) {
+      throw new ValidationError('Unauthorized! No refresh token.')
+    }
+
+    const decode = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET as string) as { id: string, role: "user" | "seller" };
+    if (!decode || !decode.id || !decode.role) {
+      return new JsonWebTokenError("Forbidden! Invalid refresh token.")
+    }
+
+    // if(decode.role === "user"){
+    const user = await prisma.users.findUnique({ where: { id: decode.id } });
+    if (!user) {
+      return new AuthenticationError("Forbidden: User/Seller not found!");
+    }
+    //  }
+
+    const newAccessToken = jwt.sign({
+      id: decode.id, role: decode.role
+    },
+      process.env.ACCESS_TOKEN_SECRET as string,
+      {
+        expiresIn: "15m"
+      }
+    )
+
+    setCookies(res, "accessToken", newAccessToken);
+
+    return res.status(201).json({
+      success: true
+    })
+
+  } catch (err) {
+    next(err)
+  }
+};
+
+
+export const getUser = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+
+  try {
+
+    const user = (req as any).user;
+
+
+    if(!user){
+      return new AuthenticationError("User not avaiable please reverify it ")
+    }
+
+    res.send(401).json({
+      message: "this is form the use get api where i don "
+    })
+  } catch (err) {
+    next(err)
+  }
+
+
+}
+
+export const userForgetPassword = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   return handleForgotPassword(req, res, next, "user");
 };
 
-export const verifyUserForgetPassword = async (req: Request, res: Response, next: NextFunction) => {
+export const verifyUserForgetPassword = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   return verifyForgetPasswordOTP(req, res, next);
 };
 
-export const userResetPassword = async (req: Request, res: Response, next: NextFunction) => {
+export const userResetPassword = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   try {
     const { email, password } = req.body;
 

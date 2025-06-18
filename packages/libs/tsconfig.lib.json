@@ -7,9 +7,17 @@
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": false,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"]
-
+    "types": [
+      "node"
+    ],
+    "declaration": true
   },
-  "include": ["src/**/*.ts"],
-  "references": []
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts"
+  ], // This should cover it
+  "exclude": [
+    "jest.config.ts",
+    "src/**/*.spec.ts"
+  ]
 }
